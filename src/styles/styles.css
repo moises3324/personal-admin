@@ -1,0 +1,23 @@
+:root{
+    --asideWidth: 200px
+}
+
+@media only screen and (min-width: 992px)  {
+    #menuNavbar{
+        width: var(--asideWidth);
+        height: 100vh;
+    }
+
+    main{
+        width: calc(100% - var(--asideWidth));
+    }
+
+}
+
+@media only screen and (max-width: 991px){
+    #menuNavbar{
+        width: 100%;
+        position: absolute;
+        background-color: white;
+    }
+}
