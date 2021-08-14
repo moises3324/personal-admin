@@ -5,6 +5,7 @@ class CentroCosto
 {
     private int $id;
     private string $name;
+    private string $description;
 
     /**
      * CentroCosto constructor.
@@ -43,5 +44,21 @@ class CentroCosto
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $this->description;
     }
 }

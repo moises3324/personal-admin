@@ -9,8 +9,35 @@
     <title>index</title>
 </head>
 <body>
-<a href="src/views/mantenedores.php">mantenedores</a>
+<!--<a href="src/views/mantenedores.php">mantenedores</a>-->
+<?php
 
+include_once 'src/app/config/Connection.php';
+
+function getAll(){
+    $conn = new Connection();
+    $centroCostoList = array();
+    try {
+        $transaction = $conn->getConnection();
+        $stmt = $transaction->prepare("SELECT * FROM centro_costo order by name");
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+        foreach ($rows as $row) {
+            $centroCosto = new CentroCosto();
+            $centroCosto->setId($row['id']);
+            $centroCosto->setName($row['name']);
+            array_push($centroCostoList, $centroCosto);
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        $conn = null;
+    }
+}
+
+print_r(getAll())
+
+?>
 <?php include_once 'src/includes/js.php' ?>
 </body>
 </html>

@@ -52,7 +52,8 @@ function getOneCentroCosto(formData) {
 
 function getAllCentrosCostros() {
     fetch(url).then(response => response.json()).then(data => {
-        formListTemplate(data)
+        //formListTemplate(data)
+        console.log(data)
     })
 }
 
@@ -62,6 +63,7 @@ function formListTemplate(formElements) {
         template += `
                   <tr>
                     <td>${fe.name}</td>
+                    <td>${fe.description}</td>
                     <td class="text-center">
                         <i class="far fa-edit btn btn-info btn-sm btnEdit" 
                         data-id="${fe.id}"

@@ -23,7 +23,8 @@
                 <table class="table align-middle table-hover border">
                     <thead>
                         <tr>
-                            <th class="col-8" scope="col">Nombre</th>
+                            <th class="col-3" scope="col">Nombre</th>
+                            <th class="col-5" scope="col">Descripcion</th>
                             <th class="col-2 text-center" scope="col">Editar</th>
                             <th class="col-2 text-center" scope="col">Borrar</th>
                         </tr>
@@ -60,10 +61,14 @@
             </div>
             <div class="modal-body">
                 <form class="py-3" id="centro-costo-form">
+                    <input type="hidden" id="centro-costo-id" name="centro-costo-id" value="">
                     <div class="form-outline">
-                        <input type="hidden" id="centro-costo-id" name="centro-costo-id" value="">
                         <input type="text" id="centro-costo-name" class="form-control" name="centro-costo-name"/>
                         <label class="form-label" for="centro-costo-name">Nombre</label>
+                    </div>
+                    <div class="form-outline">
+                        <input type="text" id="centro-costo-description" class="form-control" name="centro-costo-description"/>
+                        <label class="form-label" for="centro-costo-description">Descripcion</label>
                     </div>
                 </form>
             </div>

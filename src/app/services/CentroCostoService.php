@@ -9,12 +9,14 @@ class CentroCostoService
     public function add(CentroCosto $centroCosto): bool
     {
         $name = $centroCosto->getName();
+        $description = $centroCosto->getDescription();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
-            $query = "INSERT INTO centro_costo VALUES(null, :name)";
+            $query = "INSERT INTO centro_costo VALUES(null, :name, :description)";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":description", $description);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -46,13 +48,15 @@ class CentroCostoService
     {
         $id = $centroCosto->getId();
         $name = $centroCosto->getName();
+        $description = $centroCosto->getDescription();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
-            $query = "UPDATE centro_costo SET name = :name WHERE id = :id";
+            $query = "UPDATE centro_costo SET name = :name, description = :description WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":description", $description);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -75,6 +79,7 @@ class CentroCostoService
             $row = $stmt->fetch();
             $centroCosto->setId($row['id']);
             $centroCosto->setName($row['name']);
+            $centroCosto->setDescription($row['description']);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {
@@ -96,6 +101,7 @@ class CentroCostoService
                 $centroCosto = new CentroCosto();
                 $centroCosto->setId($row['id']);
                 $centroCosto->setName($row['name']);
+                $centroCosto->setDescription($row['description']);
                 array_push($centroCostoList, $centroCosto);
             }
         } catch (PDOException $e) {

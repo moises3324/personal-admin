@@ -6,7 +6,7 @@ class Connection
     private string $host = 'localhost';
     private string $database = 'personal_admin';
     private string $username = 'nisferes';
-    private string $password = 'nisferes';
+    private string $password = 'Element10*';
 
     /**
      * Connection constructor.
