@@ -16,14 +16,13 @@
 </aside>
 <main class="float-start">
     <?php include_once '../includes/mantenedores_tabs.php' ?>
-    <div class="tab-content" id="myTabContent0">
+    <div class="tab-content" id="mantenedores_tab">
         <?php include_once '../includes/mantenedores_tabs_content/centro_costo.php' ?>
         <?php include_once '../includes/mantenedores_tabs_content/contrato.php' ?>
         <?php include_once '../includes/mantenedores_tabs_content/empleado.php' ?>
     </div>
 </main>
 <?php include_once '../includes/js.php' ?>
-<script src="../scripts/mantenedores_behaviors.js"></script>
-<script src="../scripts/mantenedores_functions.js"></script>
+<script src="../scripts/mantenedores/centro_costo_functions.js"></script>
 </body>
 </html>

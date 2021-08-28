@@ -21,14 +21,14 @@ if ($_POST) {
             $model->setName($name);
             $model->setDescription($description);
             if ($service->add($model)) {
-                echo 'Successful';
+                echo 'Centro costo ingresado correctamente';
             } else {
                 echo 'Error';
             }
             break;
         case 'delete':
             if ($service->delete($id)) {
-                echo 'Successful';
+                echo 'Centro costo eliminado correctamente';
             } else {
                 echo 'Error';
             }

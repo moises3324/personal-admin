@@ -7,9 +7,6 @@ class CentroCosto
     private string $name;
     private string $description;
 
-    /**
-     * CentroCosto constructor.
-     */
     public function __construct()
     {
     }
@@ -55,10 +52,11 @@ class CentroCosto
     }
 
     /**
-     * @param string $name
+     * @param string $description
      */
     public function setDescription(string $description): void
     {
-        $this->description = $this->description;
+        $this->description = $description;
     }
+
 }

@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+<ul class="nav nav-tabs mb-3" id="mantenedores_tablist" role="mantenedores_tablist">
     <li class="nav-item" role="presentation">
         <button
             class="nav-link active"

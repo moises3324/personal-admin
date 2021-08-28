@@ -4,7 +4,6 @@ include_once '../models/CentroCosto.php';
 
 class CentroCostoService
 {
-    private Connection $conn;
 
     public function add(CentroCosto $centroCosto): bool
     {
