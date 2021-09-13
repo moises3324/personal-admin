@@ -1,6 +1,6 @@
 <?php
 
-class CentroCosto
+class TipoExamen
 {
     private int $id;
     private string $name;
@@ -57,5 +57,4 @@ class CentroCosto
     {
         $this->description = $description;
     }
-
 }

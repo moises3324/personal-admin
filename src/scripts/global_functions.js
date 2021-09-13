@@ -1,7 +1,6 @@
-const navbarToggler = document.querySelector(".navbar-toggler")
-const menuNavbar = document.querySelector("#menuNavbar")
+const menuNavbarItemExpand = document.querySelector("#menuNavbarItemExpand")
+const subMenuItems = document.querySelector("#subMenuItems")
 
-navbarToggler.addEventListener("click", ()=>{
-    menuNavbar.classList.toggle("d-none")
-    menuNavbar.classList.toggle("d-block")
+menuNavbarItemExpand.addEventListener("click", ()=>{
+    subMenuItems.classList.toggle("w3-hide")
 })

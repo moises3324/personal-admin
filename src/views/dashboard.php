@@ -9,9 +9,9 @@
     <title><?php echo basename($_SERVER['PHP_SELF'], ".php"); ?></title>
 </head>
 <body>
-<header>
+<aside>
     <?php include_once '../includes/menu.php' ?>
-</header>
+</aside>
 <main>
 
 </main>
