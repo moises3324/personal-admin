@@ -21,27 +21,20 @@ if ($_POST) {
             $model->setName($name);
             $model->setDescription($description);
             if ($service->add($model)) {
-                echo 'Centro costo ingresado correctamente';
-            } else {
-                echo 'Error';
+                echo 'Registro agregado correctamente';
             }
             break;
         case 'delete':
             if ($service->delete($id)) {
-                echo 'Centro costo eliminado correctamente';
-            } else {
-                echo 'Error';
+                echo 'Registro eliminado correctamente';
             }
             break;
         case 'update':
-            echo $id;
             $model->setId((int)$id);
             $model->setName($name);
             $model->setDescription($description);
             if ($service->update($model)) {
-                echo 'Successful';
-            } else {
-                echo 'Error';
+                echo 'Registro actualizado correctamente';
             }
             break;
         case 'getOne':
@@ -55,8 +48,6 @@ if ($_POST) {
                 );
                 $jsonstring = json_encode($json[0]);
                 echo $jsonstring;
-            }else{
-                echo 'error';
             }
             break;
         default:

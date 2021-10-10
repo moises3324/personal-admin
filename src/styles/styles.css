@@ -1,29 +1,107 @@
-:root{
-    --asideWidth: 200px
+* {
+    font-family: 'Roboto', sans-serif;
 }
 
-table tbody tr td{
-    padding: 0.5rem 1rem!important;
+:root {
+    --asideWidth: 250px;
+    --headerHeight: 72px;
 }
 
-@media only screen and (min-width: 992px)  {
-    #menuNavbar{
-        width: var(--asideWidth);
-        height: 100vh;
-        background-color: red;
+.grid-container {
+    display: grid;
+    grid-template-columns: var(--asideWidth) 1fr;
+    grid-template-rows: var(--headerHeight) 1fr;
+    grid-template-areas:
+        'header header'
+        'aside main';
+}
+
+aside {
+    grid-area: aside;
+}
+
+header {
+    grid-area: header;
+    background-color: #2a6592;
+    color: #FFFFFF;
+}
+
+header .sectionTitle h2 {
+    margin-left: var(--asideWidth);
+    font-weight: bold;
+}
+
+main {
+    grid-area: main;
+    background-color: #F8F9FA;
+}
+
+.rotate180 {
+    transform: rotate(180deg);
+}
+
+.menuItem button, td {
+    display: flex;
+    align-items: center;
+}
+
+td .material-icons, #responseAlert .material-icons  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#deleteModal {
+    z-index: 5;
+    width: 400px;
+    display: none;
+    position: fixed;
+    right: calc(50% - calc(400px / 2));
+    top: calc(var(--headerHeight) + 10px);
+}
+
+.menuItem .menuItemText {
+    width: calc(var(--asideWidth) - 24px);
+}
+
+.menuItem .material-icons {
+    width: 24px;
+}
+
+@media only screen and (min-width: 992px) {
+    #menuNavbar {
+        height: 100%;
     }
 
-    main{
-        width: calc(100% - var(--asideWidth) - 10px);
+    #menuNavbar .menuItem .active {
+        color: red;
+    }
 
-        margin-left: var(--asideWidth);
-        background-color: blue;
+    aside {
+        height: calc(100vh - var(--headerHeight));
+    }
+
+    main {
+        min-height: calc(100vh - var(--headerHeight));
+    }
+
+    #recordModal .w3-modal-content {
+        max-width: 600px;
+    }
+
+    #responseAlert {
+        z-index: 4;
+        max-width: 200px;
+        display: none;
+        position: fixed;
+        right: 10px;
+        top: calc(var(--headerHeight) + 10px);
     }
 
 }
 
-@media only screen and (max-width: 991px){
-    #menuNavbar{
+@media only screen and (max-width: 991px) {
+    #menuNavbar {
         width: 100%;
         position: absolute;
         background-color: white;

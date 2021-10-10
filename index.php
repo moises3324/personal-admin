@@ -9,7 +9,7 @@
     <title>index</title>
 </head>
 <body>
-<a href="src/views/mantenedores.php">mantenedores</a>
+<a href="src/views/dashboard.php">Dashboard</a>
 
 <?php include_once 'src/includes/js.php' ?>
 </body>
