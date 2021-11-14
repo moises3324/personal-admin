@@ -7,8 +7,6 @@ const btnNew = document.querySelector("#btnNew")
 const btnSave = document.querySelector("#btnSave")
 const recordModal = document.querySelector("#recordModal")
 const btnCancelRecordModal = document.querySelector("#btnCancelRecordModal")
-const totalRecords = document.querySelector("#totalRecords")
-const responseAlert = document.querySelector("#responseAlert")
 const props = {icon: "", text: "", css: ""}
 const recordId = document.querySelector("#centro-costo-id")
 const recordName = document.querySelector("#centro-costo-name")
@@ -57,10 +55,19 @@ btnCancelRecordModal.addEventListener("click", () => {
 btnSave.addEventListener("click", () => {
     let formData = new FormData()
     const formElements = document.forms['centroCostoForm']
+    let errorList = new Array()
 
     for (let element of formElements) {
         formData.append(element.name, element.value)
+        if (element.required && element.value === ""){
+            errorList.push(element)
+        }
     }
+    console.log(errorList.length)
+    if (errorList.length > 0){
+        return false
+    }
+
     if (btnSave.textContent === "Agregar") {
         formData.append("action", "create")
         callAddRecord(formData)
@@ -78,7 +85,7 @@ btnCancelRecordModal.addEventListener("click", () => {
     cleanInputs(formElements)
 })
 
-centroCostoSortItem.addEventListener("change", ()=>{
+centroCostoSortItem.addEventListener("change", () => {
     w3.sortHTML('#centroCostoTable', '.item', 'td:nth-child(1)')
 })
 
@@ -113,67 +120,11 @@ function generateTable(records) {
     dataTable.innerHTML = template
 }
 
-//Show the total records in the table
-function setTotalRecords(data) {
-    totalRecords.innerHTML = data.length
-}
-
 //Show the selected record information in the record modal (edit mode)
 function showRecordInformation(data) {
     recordId.value = data.id
     recordName.value = data.name
     recordDescription.value = data.description
-}
-
-//Show the record modal
-function showRecordModal() {
-    recordModal.style.display = 'block'
-}
-
-//Hide the record modal
-function hideRecordModal() {
-    recordModal.style.display = 'none'
-}
-
-//Set the information to show in the response alert
-function handleResponseAlert(data) {
-    if (data.includes('correctamente')) {
-        props.icon = "check_circle"
-        props.text = data
-        props.css = "w3-light-green w3-text-white"
-    } else if (data.includes('Duplicate entry')) {
-        props.icon = "error"
-        props.text = "Error: registro ya existe. No se puede ingresar dos veces"
-        props.css = "w3-red w3-text-white"
-    } else {
-        props.icon = "error"
-        props.text = data
-        props.css = "w3-red w3-text-white"
-    }
-    showResponseAlert(props)
-    setTimeout(hideResponseAlert, 2000)
-}
-
-//Show the response alert
-function showResponseAlert(props) {
-    const message = `
-         <div class="w3-panel w3-display-container w3-padding-8 ${props.css}">
-             <div class="w3-center">
-                <span class="material-icons">
-                    ${props.icon}
-                </span>
-             </div>
-             <div class="w3-center">
-                ${props.text}
-             </div>
-         </div>
-    `
-    responseAlert.innerHTML = message
-    responseAlert.style.display = 'block'
-}
-
-function hideResponseAlert() {
-    responseAlert.style.display = 'none'
 }
 
 //Clean up the inputs in the form

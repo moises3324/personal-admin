@@ -72,7 +72,11 @@
                                 <label for="centro-costo-name">Nombre</label>
                                 <input type="text" id="centro-costo-name"
                                        name="centro-costo-name"
-                                       class="w3-input w3-border">
+                                       class="w3-input w3-border"
+                                       required>
+                            </div>
+                            <div class="w3-row">
+                                <small id="errorName" class="w3-red w3-hide">Este campo no puede quedar vacio</small>
                             </div>
                         </div>
                         <div class="w3-row w3-padding-8">
