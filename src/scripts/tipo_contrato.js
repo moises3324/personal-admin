@@ -1,18 +1,10 @@
 //----- ASSIGNMENTS -----
-const url = "../app/controllers/TipoExamenController.php"
+const url = "../app/controllers/TipoContratoController.php"
 
-const tipoExamenSortItem = document.querySelector("#tipoExamenSortItem")
-const dataTable = document.querySelector("#dataTable")
-const btnNew = document.querySelector("#btnNew")
-const btnSave = document.querySelector("#btnSave")
-const recordModal = document.querySelector("#recordModal")
-const btnCancelRecordModal = document.querySelector("#btnCancelRecordModal")
-const totalRecords = document.querySelector("#totalRecords")
-const responseAlert = document.querySelector("#responseAlert")
-const props = {icon: "", text: "", css: ""}
-const recordId = document.querySelector("#tipo-examen-id")
-const recordName = document.querySelector("#tipo-examen-name")
-const recordDescription = document.querySelector("#tipo-examen-description")
+const tipoContratoSortItem = document.querySelector("#tipoContratoSortItem")
+const recordId = document.querySelector("#tipo-contrato-id")
+const recordName = document.querySelector("#tipo-contrato-name")
+const recordDescription = document.querySelector("#tipo-contrato-description")
 
 
 //----- ACTIONS -----
@@ -28,14 +20,14 @@ dataTable.addEventListener("click", (e) => {
         const id = e.target.getAttribute("data-id")
         const name = e.target.getAttribute("data-name")
         formData.set("action", "delete")
-        formData.set("tipo-examen-id", id)
+        formData.set("tipo-contrato-id", id)
         if (confirm("¿Esta seguro que quiere eliminar el registro " + name + "?")) {
             callDeleteRecord(formData)
         }
     } else if (e.target.classList.contains("btnEdit")) {
         const id = e.target.getAttribute("data-id")
         formData.set("action", "getOne")
-        formData.set("tipo-examen-id", id)
+        formData.set("tipo-contrato-id", id)
         callGetRecord(formData)
         btnSave.textContent = "Actualizar"
         showRecordModal()
@@ -56,7 +48,7 @@ btnCancelRecordModal.addEventListener("click", () => {
 //When the button "Agregar" or "Actualizar" are clicked in the record modal
 btnSave.addEventListener("click", () => {
     let formData = new FormData()
-    const formElements = document.forms['tipoExamenForm']
+    const formElements = document.forms['tipoContratoForm']
 
     for (let element of formElements) {
         formData.append(element.name, element.value)
@@ -74,12 +66,12 @@ btnSave.addEventListener("click", () => {
 
 //When the button "Cancelar" is clicked in the record modal
 btnCancelRecordModal.addEventListener("click", () => {
-    const formElements = document.forms['tipoExamenForm']
+    const formElements = document.forms['tipoContratoForm']
     cleanInputs(formElements)
 })
 
-tipoExamenSortItem.addEventListener("change", ()=>{
-    w3.sortHTML('#tipoExamenTable', '.item', 'td:nth-child(1)')
+tipoContratoSortItem.addEventListener("change", ()=>{
+    w3.sortHTML('#tipoContratoTable', '.item', 'td:nth-child(1)')
 })
 
 
