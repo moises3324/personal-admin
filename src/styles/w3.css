@@ -716,13 +716,17 @@ a {
     margin-right: -16px
 }
 
-.w3-content, .w3-auto {
+.w3-content, .w3-content-L, .w3-auto {
     margin-left: auto;
     margin-right: auto
 }
 
 .w3-content {
     max-width: 980px
+}
+
+.w3-content-L{
+    max-width: 1360px;
 }
 
 .w3-auto {
@@ -1366,6 +1370,10 @@ a {
 
 .w3-padding-top-24 {
     padding-top: 24px !important
+}
+
+.w3-padding-32-full{
+    padding: 32px;
 }
 
 .w3-left {

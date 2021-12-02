@@ -7,11 +7,7 @@ class Empleado
     private string $names;
     private string $father_last_name;
     private string $mother_last_name;
-    private DateTime $date_of_birth;
-    private string $epp;
-    private string $observation;
-    private int $contratacion_id;
-    private int $centro_cosoto_id;
+    private string $date_of_birth;
 
     public function __construct()
     {
@@ -98,83 +94,18 @@ class Empleado
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDateOfBirth(): DateTime
+    public function getDateOfBirth(): string
     {
         return $this->date_of_birth;
     }
 
     /**
-     * @param DateTime $date_of_birth
+     * @param string $date_of_birth
      */
-    public function setDateOfBirth(DateTime $date_of_birth): void
+    public function setDateOfBirth(string $date_of_birth): void
     {
         $this->date_of_birth = $date_of_birth;
     }
-
-    /**
-     * @return string
-     */
-    public function getEpp(): string
-    {
-        return $this->epp;
-    }
-
-    /**
-     * @param string $epp
-     */
-    public function setEpp(string $epp): void
-    {
-        $this->epp = $epp;
-    }
-
-    /**
-     * @return string
-     */
-    public function getObservation(): string
-    {
-        return $this->observation;
-    }
-
-    /**
-     * @param string $observation
-     */
-    public function setObservation(string $observation): void
-    {
-        $this->observation = $observation;
-    }
-
-    /**
-     * @return int
-     */
-    public function getContratacionId(): int
-    {
-        return $this->contratacion_id;
-    }
-
-    /**
-     * @param int $contratacion_id
-     */
-    public function setContratacionId(int $contratacion_id): void
-    {
-        $this->contratacion_id = $contratacion_id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCentroCosotoId(): int
-    {
-        return $this->centro_cosoto_id;
-    }
-
-    /**
-     * @param int $centro_cosoto_id
-     */
-    public function setCentroCosotoId(int $centro_cosoto_id): void
-    {
-        $this->centro_cosoto_id = $centro_cosoto_id;
-    }
-
 }

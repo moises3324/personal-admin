@@ -1,9 +1,9 @@
 //----- ASSIGNMENTS -----
 const url = "../app/controllers/EmpleadoController.php"
 
-const empleadoSortItem = document.querySelector("#centroCostoSortItem")
+const empleadoSortItem = document.querySelector("#empleadoSortItem")
 const empleadoId = document.querySelector("#empleado-id")
-const empleadoName = document.querySelector("#empleado-name")
+const empleadoName = document.querySelector("#empleado-names")
 const empleadoFatherLastName = document.querySelector("#empleado-father-last-name")
 const empleadoMotherLastName = document.querySelector("#empleado-mother-last-name")
 const empleadoRut = document.querySelector("#empleado-rut")
@@ -45,12 +45,12 @@ btnSave.addEventListener("click", () => {
 
     for (let element of formElements) {
         formData.append(element.name, element.value)
-        if (element.required && element.value === ""){
+        if (element.required && element.value === "") {
             errorList.push(element)
         }
     }
 
-    if (errorList.length > 0){
+    if (errorList.length > 0) {
         return false
     }
 
@@ -87,18 +87,17 @@ function generateTable(records) {
                     <td>${record.names}</td>
                     <td>${record.fatherLastName}</td>
                     <td>${record.motherLastName}</td>
-                    <td>${record.dateOfBirth}</td>
                     <td class="w3-center">
                         <span  
                         data-id="${record.id}" 
-                        data-name="${record.name}"
+                        data-name="${record.names}"
                         class="material-icons btnEdit w3-button w3-white w3-border-0 w3-ripple"
                         >edit</span>   
                     </td>                        
                     <td class="w3-center">
                         <span
                         data-id="${record.id}" 
-                        data-name="${record.name}" 
+                        data-name="${record.names}" 
                         class="material-icons btnDelete w3-button w3-white w3-border-0 w3-hover-red w3-hover-text-white 
                         w3-ripple" 
                         >delete</span>
@@ -112,7 +111,7 @@ function generateTable(records) {
 //Show the selected record information in the record modal (edit mode)
 function showRecordInformation(data) {
     empleadoId.value = data.id
-    empleadoName.value = data.name
+    empleadoName.value = data.names
     empleadoFatherLastName.value = data.fatherLastName
     empleadoMotherLastName.value = data.motherLastName
     empleadoRut.value = data.rut
@@ -133,8 +132,8 @@ const callGetAllRecords = () => {
         generateTable(data)
         setTotalRecords(data)
     }).catch(error => {
-        console.log(error.message.text)
-    })
+        console.log(error);
+      });
 }
 
 const callDeleteRecord = (record) => {
@@ -142,7 +141,7 @@ const callDeleteRecord = (record) => {
         callGetAllRecords()
         handleResponseAlert(data)
     }).catch(error => {
-        console.log(error.message.text)
+        console.log(error)
     })
 }
 
@@ -150,7 +149,7 @@ const callGetRecord = (record) => {
     getRecord(record).then(response => response.json()).then(data => {
         showRecordInformation(data)
     }).catch(error => {
-        console.log(error.message.text)
+        console.log(error)
     })
 }
 
@@ -159,7 +158,7 @@ const callAddRecord = (record) => {
         callGetAllRecords()
         handleResponseAlert(data)
     }).catch(error => {
-        console.log(error.message.text)
+        console.log(error)
     })
 }
 
@@ -168,6 +167,6 @@ const callUpdateRecord = (record) => {
         callGetAllRecords()
         handleResponseAlert(data)
     }).catch(error => {
-        console.log(error.message.text)
+        console.log(error)
     })
 }

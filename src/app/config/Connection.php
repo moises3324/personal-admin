@@ -3,10 +3,10 @@
 
 class Connection
 {
-    private string $host = 'localhost';
+    private string $host = '192.168.1.19';
     private string $database = 'personal_admin';
     private string $username = 'nisferes';
-    private string $password = 'Nisferes1*';
+    private string $password = 'nisferes1*';
 
     /**
      * Connection constructor.

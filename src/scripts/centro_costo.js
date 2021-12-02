@@ -34,16 +34,6 @@ dataTable.addEventListener("click", (e) => {
     }
 })
 
-//When the button "Nuevo registro" is clicked
-btnNew.addEventListener("click", () => {
-    btnSave.textContent = "Agregar"
-    showRecordModal()
-})
-
-//When the button "Cancel" in the record modal is clicked
-btnCancelRecordModal.addEventListener("click", () => {
-    hideRecordModal()
-})
 
 //When the button "Agregar" or "Actualizar" are clicked in the record modal
 btnSave.addEventListener("click", () => {

@@ -104,6 +104,6 @@
 <div id="responseAlert"></div>
 
 <?php include_once '../includes/js.php' ?>
-<script src="../scripts/tipo_contrato_functions.js"></script>
+<script src="../scripts/tipo_contrato.js"></script>
 </body>
 </html>

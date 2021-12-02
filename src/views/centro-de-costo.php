@@ -108,7 +108,7 @@
 <div id="responseAlert"></div>
 
 <?php include_once '../includes/js.php' ?>
-<script src="../scripts/centro_costo_functions.js"></script>
+<script src="../scripts/centro_costo.js"></script>
 </body>
 </html>
 

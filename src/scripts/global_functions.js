@@ -1,12 +1,39 @@
 const menuNavbarItemExpand1 = document.querySelector("#menuNavbarItemExpand1")
-const subMenuItems = document.querySelector("#subMenuItems")
+const menuNavbarItemExpand2 = document.querySelector("#menuNavbarItemExpand2")
+const subMenuItems1 = document.querySelector("#subMenuItems1")
+const subMenuItems2 = document.querySelector("#subMenuItems2")
 const arrow1 = document.querySelector("#arrow1")
+const arrow2 = document.querySelector("#arrow2")
+
 const totalRecords = document.querySelector("#totalRecords")
 const responseAlert = document.querySelector("#responseAlert")
+const dataTable = document.querySelector("#dataTable")
+const btnNew = document.querySelector("#btnNew")
+const btnSave = document.querySelector("#btnSave")
+const recordModal = document.querySelector("#recordModal")
+const btnCancelRecordModal = document.querySelector("#btnCancelRecordModal")
+const props = {icon: "", text: "", css: ""}
 
 menuNavbarItemExpand1.addEventListener("click", () => {
-    subMenuItems.classList.toggle("w3-hide")
+    subMenuItems1.classList.toggle("w3-hide")
     arrow1.classList.toggle("rotate180")
+})
+
+menuNavbarItemExpand2.addEventListener("click", () => {
+    subMenuItems2.classList.toggle("w3-hide")
+    arrow2.classList.toggle("rotate180")
+})
+
+
+//When the button "Nuevo registro" is clicked
+btnNew.addEventListener("click", () => {
+    btnSave.textContent = "Agregar"
+    showRecordModal()
+})
+
+//When the button "Cancel" in the record modal is clicked
+btnCancelRecordModal.addEventListener("click", () => {
+    hideRecordModal()
 })
 
 //Show the response alert

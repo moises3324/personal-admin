@@ -104,6 +104,6 @@
 <div id="responseAlert"></div>
 
 <?php include_once '../includes/js.php' ?>
-<script src="../scripts/tipo_examen_functions.js"></script>
+<script src="../scripts/tipo_examen.js"></script>
 </body>
 </html>
