@@ -12,7 +12,6 @@ $names = "";
 $fatherLastName = "";
 $motherLastName = "";
 $rut = "";
-$dateOfBirth = "";
 
 if ($_POST) {
     $action = $_POST['action'] ?? null;
@@ -21,7 +20,6 @@ if ($_POST) {
     $fatherLastName = $_POST['empleado-father-last-name'] ?? null;
     $motherLastName = $_POST['empleado-mother-last-name'] ?? null;
     $rut = $_POST['empleado-rut'] ?? null;
-    $dateOfBirth = $_POST['empleado-date-of-birth'] ?? null;
 
     switch ($action) {
         case 'create':
@@ -29,7 +27,6 @@ if ($_POST) {
             $model->setFatherLastName($fatherLastName);
             $model->setMotherLastName($motherLastName);
             $model->setRut($rut);
-            $model->setDateOfBirth($dateOfBirth);
             if ($service->add($model)) {
                 echo 'Registro agregado correctamente';
             }
@@ -45,7 +42,6 @@ if ($_POST) {
             $model->setFatherLastName($fatherLastName);
             $model->setMotherLastName($motherLastName);
             $model->setRut($rut);
-            $model->setDateOfBirth($dateOfBirth);
             if ($service->update($model)) {
                 echo 'Registro actualizado correctamente';
             }
@@ -60,7 +56,6 @@ if ($_POST) {
                     'names' => $model->getNames(),
                     'fatherLastName' => $model->getFatherLastName(),
                     'motherLastName' => $model->getMotherLastName(),
-                    'dateOfBirth' => $model->getDateOfBirth(),
                 );
                 $jsonstring = json_encode($json[0]);
                 echo $jsonstring;

@@ -10,7 +10,6 @@ class EmpleadoService
         $fatherLastName = $empleado->getFatherLastName();
         $motherLastName = $empleado->getMotherLastName();
         $rut = $empleado->getRut();
-        $dateOfBirth = $empleado->getDateOfBirth();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
@@ -20,15 +19,13 @@ class EmpleadoService
                            :rut, 
                            :names, 
                            :father_last_name, 
-                           :mother_last_name, 
-                           :date_of_birth
+                           :mother_last_name
                            )";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":rut", $rut);
             $stmt->bindParam(":names", $names);
             $stmt->bindParam(":father_last_name", $fatherLastName);
             $stmt->bindParam(":mother_last_name", $motherLastName);
-            $stmt->bindParam(":date_of_birth", $dateOfBirth);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -63,7 +60,6 @@ class EmpleadoService
         $fatherLastName = $empleado->getFatherLastName();
         $motherLastName = $empleado->getMotherLastName();
         $rut = $empleado->getRut();
-        $dateOfBirth = $empleado->getDateOfBirth();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
@@ -72,8 +68,7 @@ class EmpleadoService
                         rut = :rut, 
                         names = :names, 
                         father_last_name = :father_last_name, 
-                        mother_last_bame = :mother_last_name, 
-                        date_of_birth = :date_of_birth 
+                        mother_last_bame = :mother_last_name
                     WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
@@ -81,7 +76,6 @@ class EmpleadoService
             $stmt->bindParam(":names", $names);
             $stmt->bindParam(":father_last_name", $fatherLastName);
             $stmt->bindParam(":mother_last_name", $motherLastName);
-            $stmt->bindParam(":date_of_birth", $dateOfBirth);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -107,7 +101,6 @@ class EmpleadoService
             $empleado->setFatherLastName($row['father_last_name']);
             $empleado->setMotherLastName($row['mother_last_name']);
             $empleado->setRut($row['rut']);
-            $empleado->setDateOfBirth($row['date_of_birth']);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {

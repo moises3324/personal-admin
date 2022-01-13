@@ -7,7 +7,6 @@ class Empleado
     private string $names;
     private string $father_last_name;
     private string $mother_last_name;
-    private string $date_of_birth;
 
     public function __construct()
     {
@@ -91,21 +90,5 @@ class Empleado
     public function setMotherLastName(string $mother_last_name): void
     {
         $this->mother_last_name = $mother_last_name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDateOfBirth(): string
-    {
-        return $this->date_of_birth;
-    }
-
-    /**
-     * @param string $date_of_birth
-     */
-    public function setDateOfBirth(string $date_of_birth): void
-    {
-        $this->date_of_birth = $date_of_birth;
     }
 }

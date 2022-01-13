@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include_once '../includes/css.php' ?>
     <title><?php echo ucfirst(str_replace("-", " ", basename($_SERVER['PHP_SELF'], ".php"))); ?></title>
@@ -16,7 +17,8 @@
         </aside>
         <header>
             <div class="sectionTitle">
-                <h2><?php echo ucfirst(str_replace("-", " ", basename($_SERVER['PHP_SELF'], ".php"))); ?></h2>
+                <h2 id="sectionTitle">
+                    <?php echo ucfirst(str_replace("-", " ", basename($_SERVER['PHP_SELF'], ".php"))); ?></h2>
             </div>
         </header>
         <main>
@@ -66,39 +68,42 @@
         <div class="w3-modal-content w3-card-4">
             <div class="w3-container">
                 <div class="w3-section">
+                    <div id="modalHeader">
+                        <h2 id="modalTitle">Agregar registro</h2>
+                    </div>
                     <div id="modalBody">
                         <form id="empleadoForm">
                             <input type="hidden" id="empleado-id" name="empleado-id" value="">
-                            <div class="w3-row-padding w3-padding-8">
-                                <div class="w3-rest">
+                            <div class="w3-row w3-padding-8">
+                                <div class="w3-quarter w3-row-padding">
+                                    <label for="empleado-rut">RUT</label>
+                                    <input type="text" id="empleado-rut" name="empleado-rut" class="w3-input w3-border"
+                                        required>
+                                </div>
+                                <div class="w3-rest w3-row-padding">
                                     <label for="empleado-name">Nombre(s)</label>
-                                    <input type="text" id="empleado-names" name="empleado-names" class="w3-input w3-border" required>
+                                    <input type="text" id="empleado-names" name="empleado-names"
+                                        class="w3-input w3-border" required>
                                 </div>
                             </div>
                             <div class="w3-row w3-padding-8">
                                 <div class="w3-half w3-row-padding">
                                     <label for="empleado-father-last-name">Apellido paterno</label>
-                                    <input type="text" id="empleado-father-last-name" name="empleado-father-last-name" class="w3-input w3-border" required>
+                                    <input type="text" id="empleado-father-last-name" name="empleado-father-last-name"
+                                        class="w3-input w3-border" required>
                                 </div>
                                 <div class="w3-half w3-row-padding">
                                     <label for="empleado-mother-last-name">Apellido materno</label>
-                                    <input type="text" id="empleado-mother-last-name" name="empleado-mother-last-name" class="w3-input w3-border" required>
+                                    <input type="text" id="empleado-mother-last-name" name="empleado-mother-last-name"
+                                        class="w3-input w3-border" required>
                                 </div>
                             </div>
-                            <div class="w3-row w3-padding-8">
-                                <div class="w3-quarter w3-row-padding">
-                                    <label for="empleado-rut">RUT</label>
-                                    <input type="text" id="empleado-rut" name="empleado-rut" class="w3-input w3-border" required>
-                                </div>
-                                <div class="w3-quarter w3-row-padding">
-                                    <label for="empleado-date-of-birth">Fecha nacimiento</label>
-                                    <input type="text" id="empleado-date-of-birth" name="empleado-date-of-birth" class="w3-input w3-border" required>
-                                </div>
-                            </div>
+                        </form>
                     </div>
                     <div class="w3-row w3-padding-top-24">
                         <div class="w3-col l12">
-                            <button type="button" class="w3-button w3-white w3-border w3-left" id="btnCancelRecordModal">
+                            <button type="button" class="w3-button w3-white w3-border w3-left"
+                                id="btnCancelRecordModal">
                                 Cancelar
                             </button>
                             <button type="button" class="w3-button w3-green w3-border w3-right" id="btnSave">Guardar

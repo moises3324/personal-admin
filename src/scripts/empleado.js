@@ -7,8 +7,6 @@ const empleadoName = document.querySelector("#empleado-names")
 const empleadoFatherLastName = document.querySelector("#empleado-father-last-name")
 const empleadoMotherLastName = document.querySelector("#empleado-mother-last-name")
 const empleadoRut = document.querySelector("#empleado-rut")
-const empleadoDateOfBirth = document.querySelector("#empleado-date-of-birth")
-
 
 //----- ACTIONS -----
 //When the page is loaded
@@ -32,6 +30,7 @@ dataTable.addEventListener("click", (e) => {
         formData.set("action", "getOne")
         formData.set("empleado-id", id)
         callGetRecord(formData)
+        modalTitle.innerHTML = "Actualizar registro"
         btnSave.textContent = "Actualizar"
         showRecordModal()
     }
@@ -115,7 +114,6 @@ function showRecordInformation(data) {
     empleadoFatherLastName.value = data.fatherLastName
     empleadoMotherLastName.value = data.motherLastName
     empleadoRut.value = data.rut
-    empleadoDateOfBirth.value = data.dateOfBirth
 }
 
 //Clean up the inputs in the form

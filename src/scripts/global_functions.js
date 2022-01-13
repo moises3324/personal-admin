@@ -5,6 +5,9 @@ const subMenuItems2 = document.querySelector("#subMenuItems2")
 const arrow1 = document.querySelector("#arrow1")
 const arrow2 = document.querySelector("#arrow2")
 
+const sectionTitle = document.querySelector("#sectionTitle")
+const modalTitle = document.querySelector("#modalTitle")
+
 const totalRecords = document.querySelector("#totalRecords")
 const responseAlert = document.querySelector("#responseAlert")
 const dataTable = document.querySelector("#dataTable")
@@ -28,6 +31,7 @@ menuNavbarItemExpand2.addEventListener("click", () => {
 //When the button "Nuevo registro" is clicked
 btnNew.addEventListener("click", () => {
     btnSave.textContent = "Agregar"
+    modalTitle.innerHTML = "Agregar registro"
     showRecordModal()
 })
 
@@ -35,6 +39,14 @@ btnNew.addEventListener("click", () => {
 btnCancelRecordModal.addEventListener("click", () => {
     hideRecordModal()
 })
+
+if(sectionTitle.innerHTML === 'Empleado' || sectionTitle.innerHTML === 'Contratacion' || sectionTitle.innerHTML === 'Curso' || sectionTitle.innerHTML === 'Examen'){
+    subMenuItems2.classList.toggle("w3-hide")
+    arrow2.classList.toggle("rotate180")
+}else if(sectionTitle.innerHTML === 'Centro de costo' || sectionTitle.innerHTML === 'Tipo de contrato' || sectionTitle.innerHTML === 'Tipo de curso' || sectionTitle.innerHTML === 'Tipo de examen'){
+    subMenuItems1.classList.toggle("w3-hide")
+    arrow1.classList.toggle("rotate180")
+}
 
 //Show the response alert
 function showResponseAlert(props) {
