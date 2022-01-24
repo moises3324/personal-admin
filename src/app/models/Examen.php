@@ -3,8 +3,9 @@
 class Examen
 {
     private int $id;
-    private DateTime $date_of_expiration;
+    private string $date_of_expiration;
     private int $tipo_examen_id;
+    private int $empleado_id;
 
     public function __construct()
     {
@@ -27,17 +28,17 @@ class Examen
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDateOfExpiration(): DateTime
+    public function getDateOfExpiration(): string
     {
         return $this->date_of_expiration;
     }
 
     /**
-     * @param DateTime $date_of_expiration
+     * @param string $date_of_expiration
      */
-    public function setDateOfExpiration(DateTime $date_of_expiration): void
+    public function setDateOfExpiration(string $date_of_expiration): void
     {
         $this->date_of_expiration = $date_of_expiration;
     }
@@ -57,5 +58,22 @@ class Examen
     {
         $this->tipo_examen_id = $tipo_examen_id;
     }
+
+     /**
+     * @return int
+     */
+    public function getEmpleadoId(): int
+    {
+        return $this->empleado_id;
+    }
+
+    /**
+     * @param int $empleado_id
+     */
+    public function setEmpleadoId(int $empleado_id): void
+    {
+        $this->empleado_id = $empleado_id;
+    }
+
 
 }

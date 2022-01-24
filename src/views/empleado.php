@@ -44,11 +44,10 @@
                         <thead class="w3-black">
                             <tr>
                                 <th style="width: 10%">RUT</th>
-                                <th style="width: 30%">Nombre(s)</th>
+                                <th style="width: 40%">Nombre(s)</th>
                                 <th style="width: 15%">Apellido paterno</th>
                                 <th style="width: 15%">Apellido materno</th>
-                                <th style="width: 10%" class="w3-center">Editar</th>
-                                <th style="width: 10%" class="w3-center">Borrar</th>
+                                <th style="width: 10%" class="w3-center">Acción</th>
                             </tr>
                         </thead>
                         <tbody id="dataTable"></tbody>
@@ -61,6 +60,34 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!--More info Modal-->
+    <div id="moreInfoModal" class="w3-modal">
+        <div class="w3-modal-content w3-card-4">
+            <div class="w3-container">
+                <div class="w3-section">
+                    <div id="modalHeader">
+                        <h2 id="moreInfoModalTitle"></h2>
+                    </div>
+                    <div id="modalBody">
+                        <div>
+                            
+                        </div>
+                    </div>
+                    <div class="w3-row w3-padding-top-24">
+                        <div class="w3-col l12">
+                            <button type="button" class="w3-button w3-white w3-border w3-left"
+                                id="btnCloseMoreInfoModal">
+                                Cerrar
+                            </button>
+                            <button type="button" class="w3-button w3-green w3-border w3-right" id="btnEdit">Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--Add/Update Modal-->
@@ -114,7 +141,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!--Alert-->

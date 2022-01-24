@@ -8,6 +8,12 @@ const empleadoFatherLastName = document.querySelector("#empleado-father-last-nam
 const empleadoMotherLastName = document.querySelector("#empleado-mother-last-name")
 const empleadoRut = document.querySelector("#empleado-rut")
 
+
+const moreInfoModal = document.querySelector("#moreInfoModal")
+const moreInfoModalTitle = document.querySelector("#moreInfoModalTitle")
+const btnCloseMoreInfoModal = document.querySelector("#btnCloseMoreInfoModal")
+
+
 //----- ACTIONS -----
 //When the page is loaded
 window.addEventListener("load", () => {
@@ -17,22 +23,12 @@ window.addEventListener("load", () => {
 //When is clicked inside the record table
 dataTable.addEventListener("click", (e) => {
     let formData = new FormData()
-    if (e.target.classList.contains("btnDelete")) {
-        const id = e.target.getAttribute("data-id")
-        const name = e.target.getAttribute("data-name")
-        formData.set("action", "delete")
-        formData.set("empleado-id", id)
-        if (confirm("¿Esta seguro que quiere eliminar el registro " + name + "?")) {
-            callDeleteRecord(formData)
-        }
-    } else if (e.target.classList.contains("btnEdit")) {
+    if (e.target.classList.contains("btnMoreInfo")) {
         const id = e.target.getAttribute("data-id")
         formData.set("action", "getOne")
         formData.set("empleado-id", id)
         callGetRecord(formData)
-        modalTitle.innerHTML = "Actualizar registro"
-        btnSave.textContent = "Actualizar"
-        showRecordModal()
+        showMoreInfoModal()
     }
 })
 
@@ -70,6 +66,10 @@ btnCancelRecordModal.addEventListener("click", () => {
     cleanInputs(formElements)
 })
 
+btnCloseMoreInfoModal.addEventListener("click", () => {
+    hideMoreInfoModal()
+})
+
 empleadoSortItem.addEventListener("change", () => {
     w3.sortHTML('#empleadoTable', '.item', 'td:nth-child(1)')
 })
@@ -90,17 +90,9 @@ function generateTable(records) {
                         <span  
                         data-id="${record.id}" 
                         data-name="${record.names}"
-                        class="material-icons btnEdit w3-button w3-white w3-border-0 w3-ripple"
-                        >edit</span>   
-                    </td>                        
-                    <td class="w3-center">
-                        <span
-                        data-id="${record.id}" 
-                        data-name="${record.names}" 
-                        class="material-icons btnDelete w3-button w3-white w3-border-0 w3-hover-red w3-hover-text-white 
-                        w3-ripple" 
-                        >delete</span>
-                    </td>
+                        class="btnMoreInfo w3-button w3-white w3-border-0 w3-ripple"
+                        >Más info</span>   
+                    </td> 
                   </tr>
         `
     })
@@ -114,6 +106,8 @@ function showRecordInformation(data) {
     empleadoFatherLastName.value = data.fatherLastName
     empleadoMotherLastName.value = data.motherLastName
     empleadoRut.value = data.rut
+
+    moreInfoModalTitle.innerHTML = data.names + " " + data.fatherLastName + " " + data.motherLastName
 }
 
 //Clean up the inputs in the form
@@ -124,6 +118,17 @@ function cleanInputs(elements) {
 }
 
 
+//Show the more info modal
+function showMoreInfoModal() {
+    moreInfoModal.style.display = 'block'
+}
+
+//Hide the show info modal
+function hideMoreInfoModal() {
+    moreInfoModal.style.display = 'none'
+}
+
+
 //----- CALLS -----
 const callGetAllRecords = () => {
     getAllRecords().then(response => response.json()).then(data => {
@@ -131,7 +136,7 @@ const callGetAllRecords = () => {
         setTotalRecords(data)
     }).catch(error => {
         console.log(error);
-      });
+    });
 }
 
 const callDeleteRecord = (record) => {

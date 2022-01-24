@@ -1,9 +1,6 @@
 const menuNavbarItemExpand1 = document.querySelector("#menuNavbarItemExpand1")
-const menuNavbarItemExpand2 = document.querySelector("#menuNavbarItemExpand2")
 const subMenuItems1 = document.querySelector("#subMenuItems1")
-const subMenuItems2 = document.querySelector("#subMenuItems2")
 const arrow1 = document.querySelector("#arrow1")
-const arrow2 = document.querySelector("#arrow2")
 
 const sectionTitle = document.querySelector("#sectionTitle")
 const modalTitle = document.querySelector("#modalTitle")
@@ -15,16 +12,11 @@ const btnNew = document.querySelector("#btnNew")
 const btnSave = document.querySelector("#btnSave")
 const recordModal = document.querySelector("#recordModal")
 const btnCancelRecordModal = document.querySelector("#btnCancelRecordModal")
-const props = {icon: "", text: "", css: ""}
+const props = { icon: "", text: "", css: "" }
 
 menuNavbarItemExpand1.addEventListener("click", () => {
     subMenuItems1.classList.toggle("w3-hide")
     arrow1.classList.toggle("rotate180")
-})
-
-menuNavbarItemExpand2.addEventListener("click", () => {
-    subMenuItems2.classList.toggle("w3-hide")
-    arrow2.classList.toggle("rotate180")
 })
 
 
@@ -40,10 +32,7 @@ btnCancelRecordModal.addEventListener("click", () => {
     hideRecordModal()
 })
 
-if(sectionTitle.innerHTML === 'Empleado' || sectionTitle.innerHTML === 'Contratacion' || sectionTitle.innerHTML === 'Curso' || sectionTitle.innerHTML === 'Examen'){
-    subMenuItems2.classList.toggle("w3-hide")
-    arrow2.classList.toggle("rotate180")
-}else if(sectionTitle.innerHTML === 'Centro de costo' || sectionTitle.innerHTML === 'Tipo de contrato' || sectionTitle.innerHTML === 'Tipo de curso' || sectionTitle.innerHTML === 'Tipo de examen'){
+if (sectionTitle.innerHTML.includes('Centro de costo') || sectionTitle.innerHTML.includes('Tipo de contrato') || sectionTitle.innerHTML.includes('Tipo de curso') || sectionTitle.innerHTML.includes('Tipo de examen')) {
     subMenuItems1.classList.toggle("w3-hide")
     arrow1.classList.toggle("rotate180")
 }
@@ -94,7 +83,6 @@ function handleResponseAlert(data) {
 function setTotalRecords(data) {
     totalRecords.innerHTML = data.length
 }
-
 
 //Show the record modal
 function showRecordModal() {
