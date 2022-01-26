@@ -109,4 +109,3 @@ class Contratacion
         $this->empleado_id = $empleado_id;
     }
 }
-}

@@ -32,7 +32,7 @@ dataTable.addEventListener("click", (e) => {
     }
 })
 
-//When the button "Agregar" or "Actualizar" are clicked in the record modal
+//When the button "Agregar" or "Actualizar" is clicked in the record modal
 btnSave.addEventListener("click", () => {
     let formData = new FormData()
     const formElements = document.forms['empleadoForm']

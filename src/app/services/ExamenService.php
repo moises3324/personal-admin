@@ -2,7 +2,7 @@
 include_once '../config/Connection.php';
 include_once '../models/Examen.php';
 
-class examenService
+class ExamenService
 {
 
     public function add(Examen $examen): bool

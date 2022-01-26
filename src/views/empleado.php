@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include_once '../includes/css.php' ?>
     <title><?php echo ucfirst(str_replace("-", " ", basename($_SERVER['PHP_SELF'], ".php"))); ?></title>
@@ -25,17 +24,27 @@
             <div class="w3-padding-32 w3-content-L">
                 <div class="w3-row">
                     <div class="w3-col l12">
-                        <button class="w3-button w3-white w3-border w3-ripple" id="btnNew">
+                        <button id="btnNew"
+                            class="w3-button w3-white w3-border w3-ripple">
                             Nuevo registro
                         </button>
                     </div>
                 </div>
                 <div class="w3-row">
                     <div class="w3-col l2 w3-right">
-                        <label for="orderByLabel" class="w3-left">Ordenar por</label>
-                        <select class="w3-select w3-border w3-white" name="orderBy" id="empleadoSortItem">
-                            <option value="NAZ" selected>Nombre (A-Z)</option>
-                            <option value="NZA">Nombre (Z-A)</option>
+                        <label for="orderByLabel" 
+                            class="w3-left">
+                            Ordenar por
+                        </label>
+                        <select name="orderBy" 
+                            id="empleadoSortItem"
+                            class="w3-select w3-border w3-white">
+                            <option value="NAZ" selected>
+                                Nombre (A-Z)
+                            </option>
+                            <option value="NZA">
+                                Nombre (Z-A)
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -55,7 +64,9 @@
                 </div>
                 <div class="w3-row">
                     <div class="w3-col l12">
-                        <p>Cantidad total de registros: <span id="totalRecords"></span></p>
+                        <p>Cantidad total de registros: 
+                            <span id="totalRecords"></span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -72,16 +83,20 @@
                     </div>
                     <div id="modalBody">
                         <div>
-                            
+
                         </div>
                     </div>
                     <div class="w3-row w3-padding-top-24">
                         <div class="w3-col l12">
-                            <button type="button" class="w3-button w3-white w3-border w3-left"
-                                id="btnCloseMoreInfoModal">
+                            <button type="button" 
+                                id="btnCloseMoreInfoModal"
+                                class="w3-button w3-white w3-border w3-left">
                                 Cerrar
                             </button>
-                            <button type="button" class="w3-button w3-green w3-border w3-right" id="btnEdit">Editar
+                            <button type="button" 
+                                id="btnEdit"
+                                class="w3-button w3-green w3-border w3-right">
+                                Editar
                             </button>
                         </div>
                     </div>
@@ -96,44 +111,125 @@
             <div class="w3-container">
                 <div class="w3-section">
                     <div id="modalHeader">
-                        <h2 id="modalTitle">Agregar registro</h2>
+                        <h2 id="modalTitle">
+                            Agregar registro
+                        </h2>
                     </div>
                     <div id="modalBody">
                         <form id="empleadoForm">
-                            <input type="hidden" id="empleado-id" name="empleado-id" value="">
-                            <div class="w3-row w3-padding-8">
-                                <div class="w3-quarter w3-row-padding">
-                                    <label for="empleado-rut">RUT</label>
-                                    <input type="text" id="empleado-rut" name="empleado-rut" class="w3-input w3-border"
-                                        required>
+                            <div id="personal-data">
+                                <div id="persona-data-title" 
+                                    class="w3-row">
+                                    <h4>
+                                        Datos personales
+                                    </h4>
                                 </div>
-                                <div class="w3-rest w3-row-padding">
-                                    <label for="empleado-name">Nombre(s)</label>
-                                    <input type="text" id="empleado-names" name="empleado-names"
-                                        class="w3-input w3-border" required>
+                                <div id="personal-data-content">
+                                    <input type="hidden" 
+                                        id="empleado-id" 
+                                        name="empleado-id" 
+                                        value="">
+                                    <div class="w3-row w3-padding-8">
+                                        <div class="w3-quarter w3-row-padding">
+                                            <label for="empleado-rut">
+                                                RUT
+                                            </label>
+                                            <input type="text" 
+                                                id="empleado-rut" 
+                                                name="empleado-rut" 
+                                                class="w3-input w3-border" 
+                                                required>
+                                        </div>
+                                        <div class="w3-rest w3-row-padding">
+                                            <label for="empleado-name">
+                                                Nombre(s)
+                                            </label>
+                                            <input type="text" 
+                                                id="empleado-names" 
+                                                name="empleado-names" 
+                                                class="w3-input w3-border" 
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="w3-row w3-padding-8">
+                                        <div class="w3-half w3-row-padding">
+                                            <label for="empleado-father-last-name">
+                                                Apellido paterno
+                                            </label>
+                                            <input type="text" 
+                                                id="empleado-father-last-name" 
+                                                name="empleado-father-last-name" 
+                                                class="w3-input w3-border" 
+                                                required>
+                                        </div>
+                                        <div class="w3-half w3-row-padding">
+                                            <label for="empleado-mother-last-name">
+                                                Apellido materno
+                                            </label>
+                                            <input type="text" 
+                                                id="empleado-mother-last-name" 
+                                                name="empleado-mother-last-name" 
+                                                class="w3-input w3-border" 
+                                                required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="w3-row w3-padding-8">
-                                <div class="w3-half w3-row-padding">
-                                    <label for="empleado-father-last-name">Apellido paterno</label>
-                                    <input type="text" id="empleado-father-last-name" name="empleado-father-last-name"
-                                        class="w3-input w3-border" required>
+                            <div id="hire-data">
+                                <div id="hire-data-title" class="w3-row">
+                                    <h4>Datos de contratación</h4>
                                 </div>
-                                <div class="w3-half w3-row-padding">
-                                    <label for="empleado-mother-last-name">Apellido materno</label>
-                                    <input type="text" id="empleado-mother-last-name" name="empleado-mother-last-name"
-                                        class="w3-input w3-border" required>
+                                <div id="hire-data-content">
+                                    <div class="w3-row w3-padding-8">
+                                        <div class="w3-quarter w3-row-padding">
+                                            <label for="contratacion-inicio">
+                                                Inicio contrato
+                                            </label>
+                                            <input type="text" 
+                                                id="contratacion-inicio" 
+                                                name="contratacion-inicio" 
+                                                class="w3-input w3-border"
+                                                placeholder="dd-MM-aaaa" 
+                                                required>
+                                        </div>
+                                        <div class="w3-quarter w3-row-padding">
+                                            <label for="contratacion-fin">
+                                                Fin contrato
+                                            </label>
+                                            <input type="text" 
+                                                id="contratacion-fin" 
+                                                name="contratacion-fin" 
+                                                class="w3-input w3-border" 
+                                                placeholder="dd-MM-aaaa"
+                                                required>
+                                        </div>
+                                        <div class="w3-rest w3-row-padding">
+                                            <label for="contratacion-centro-costo">
+                                                Centro costo
+                                            </label>
+                                            <select class="w3-select w3-border" name="contratacion-centro-costo-opcion">
+                                                <option value="" disabled selected>Elija una opción</option>
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="w3-row w3-padding-top-24">
                         <div class="w3-col l12">
-                            <button type="button" class="w3-button w3-white w3-border w3-left"
-                                id="btnCancelRecordModal">
+                            <button type="button" 
+                                id="btnCancelRecordModal"
+                                class="w3-button w3-white w3-border w3-left">
                                 Cancelar
                             </button>
-                            <button type="button" class="w3-button w3-green w3-border w3-right" id="btnSave">Guardar
+                            <button type="button" 
+                                id="btnSave"
+                                class="w3-button w3-green w3-border w3-right">
+                                Guardar
                             </button>
                         </div>
                     </div>
