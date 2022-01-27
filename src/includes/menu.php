@@ -36,7 +36,7 @@ $menu = basename($_SERVER['PHP_SELF'], ".php");
                 <a href="../views/tipo-de-examen.php"
                    class="w3-bar-item w3-button w3-padding-left <?php echo ($menu == 'tipo-de-examen') ?
                        'active' : ''; ?>">
-                    Tipo de examen</a>
+                    Tipo de exámen</a>
             </div>
         </div>
     </div>

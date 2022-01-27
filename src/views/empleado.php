@@ -207,13 +207,71 @@
                                             <label for="contratacion-centro-costo">
                                                 Centro costo
                                             </label>
-                                            <select class="w3-select w3-border" name="contratacion-centro-costo-opcion">
-                                                <option value="" disabled selected>Elija una opción</option>
-                                                <option value="1">Option 1</option>
-                                                <option value="2">Option 2</option>
-                                                <option value="3">Option 3</option>
+                                            <select id="contratacion-centro-costo-opcion"
+                                                name="contratacion-centro-costo-opcion" 
+                                                class="w3-select w3-border">                                                
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="exams-data">
+                                <div id="exams-data-title" class="w3-row">
+                                    <h4>Exámenes realizados</h4>
+                                </div>
+                                <div id="examsns-data-content">
+                                    <div class="w3-row w3-padding-8">
+                                        <div class="w3-half w3-row-padding">
+                                            <label for="examenes-tipo-examen">
+                                                Exámen
+                                            </label>
+                                            <select id="examenes-tipo-examen-opcion"
+                                                name="examenes-tipo-examen-opcion"
+                                                class="w3-select w3-border">
+                                            </select>
+                                        </div>
+                                        <div class="w3-quarter w3-row-padding">
+                                            <label for="examen-expiration">
+                                                Fecha expiración
+                                            </label>
+                                            <input type="text" 
+                                                id="examen-expiration" 
+                                                name="examen-expiration" 
+                                                class="w3-input w3-border" 
+                                                placeholder="dd-MM-aaaa"
+                                                required>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="curses-data">
+                                <div id="curses-data-title" class="w3-row">
+                                    <h4>Cursos realizados</h4>
+                                </div>
+                                <div id="curses-data-content">
+                                    <div class="w3-row w3-padding-8">
+                                        <div class="w3-half w3-row-padding">
+                                            <label for="cursos-tipo-curso">
+                                                Curso
+                                            </label>
+                                            <select id="cursos-tipo-curso-opcion"
+                                                name="cursos-tipo-curso-opcion"
+                                                class="w3-select w3-border">
+                                            </select>
+                                        </div>
+                                        <div class="w3-quarter w3-row-padding">
+                                            <label for="curses-expiration">
+                                                Fecha expiración
+                                            </label>
+                                            <input type="text" 
+                                                id="curses-expiration" 
+                                                name="curses-expiration" 
+                                                class="w3-input w3-border" 
+                                                placeholder="dd-MM-aaaa"
+                                                required>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

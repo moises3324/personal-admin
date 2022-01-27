@@ -60,7 +60,7 @@ btnCancelRecordModal.addEventListener("click", () => {
     cleanInputs(formElements)
 })
 
-tipoContratoSortItem.addEventListener("change", ()=>{
+tipoContratoSortItem.addEventListener("change", () => {
     w3.sortHTML('#tipoContratoTable', '.item', 'td:nth-child(1)')
 })
 
@@ -112,7 +112,7 @@ function cleanInputs(elements) {
 
 //----- CALLS -----
 const callGetAllRecords = () => {
-    getAllRecords().then(response => response.json()).then(data => {
+    getAllRecords(url).then(response => response.json()).then(data => {
         generateTable(data)
         setTotalRecords(data)
     }).catch(error => {
@@ -121,8 +121,8 @@ const callGetAllRecords = () => {
 }
 
 const callDeleteRecord = (record) => {
-    deleteRecord(record).then(response => response.text()).then(data => {
-        callGetAllRecords()
+    deleteRecord(record, url).then(response => response.text()).then(data => {
+        callGetAllRecords(url)
         handleResponseAlert(data)
     }).catch(error => {
         console.log(error.message)
@@ -130,7 +130,7 @@ const callDeleteRecord = (record) => {
 }
 
 const callGetRecord = (record) => {
-    getRecord(record).then(response => response.json()).then(data => {
+    getRecord(record, url).then(response => response.json()).then(data => {
         showRecordInformation(data)
     }).catch(error => {
         console.log(error.message)
@@ -138,8 +138,8 @@ const callGetRecord = (record) => {
 }
 
 const callAddRecord = (record) => {
-    addRecord(record).then(response => response.text()).then(data => {
-        callGetAllRecords()
+    addRecord(record, url).then(response => response.text()).then(data => {
+        callGetAllRecords(url)
         handleResponseAlert(data)
     }).catch(error => {
         console.log(error.message)
@@ -147,8 +147,8 @@ const callAddRecord = (record) => {
 }
 
 const callUpdateRecord = (record) => {
-    updateRecord(record).then(response => response.text()).then(data => {
-        callGetAllRecords()
+    updateRecord(record, url).then(response => response.text()).then(data => {
+        callGetAllRecords(url)
         handleResponseAlert(data)
     }).catch(error => {
         console.log(error.message)
