@@ -21,16 +21,20 @@ menuNavbarItemExpand1.addEventListener("click", () => {
 
 
 //When the button "Nuevo registro" is clicked
-btnNew.addEventListener("click", () => {
-    btnSave.textContent = "Agregar"
-    modalTitle.innerHTML = "Agregar registro"
-    showRecordModal()
-})
+if (btnNew != null) {
+    btnNew.addEventListener("click", () => {
+        btnSave.textContent = "Agregar"
+        modalTitle.innerHTML = "Agregar registro"
+        showRecordModal()
+    })
+}
 
-//When the button "Cancel" in the record modal is clicked
-btnCancelRecordModal.addEventListener("click", () => {
-    hideRecordModal()
-})
+if (btnCancelRecordModal != null) {
+    //When the button "Cancel" in the record modal is clicked
+    btnCancelRecordModal.addEventListener("click", () => {
+        hideRecordModal()
+    })
+}
 
 if (sectionTitle.innerHTML.includes('Centro de costo') || sectionTitle.innerHTML.includes('Tipo de contrato') || sectionTitle.innerHTML.includes('Tipo de curso') || sectionTitle.innerHTML.includes('Tipo de examen')) {
     subMenuItems1.classList.toggle("w3-hide")
