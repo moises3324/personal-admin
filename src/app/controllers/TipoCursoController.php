@@ -6,20 +6,20 @@ include_once '../services/TipoCursoService.php';
 $model = new TipoCurso();
 $service = new TipoCursoService();
 
-$action = "";
+$accion = "";
 $id = "";
-$name = "";
-$description = "";
+$nombre = "";
+$descripcion = "";
 
 if ($_POST) {
-    $action = $_POST['action'] ?? null;
+    $accion = $_POST['accion'] ?? null;
     $id = $_POST['tipo-curso-id'] ?? null;
-    $name = $_POST['tipo-curso-name'] ?? null;
-    $description = $_POST['tipo-curso-description'] ?? null;
-    switch ($action) {
+    $nombre = $_POST['tipo-curso-nombre'] ?? null;
+    $descripcion = $_POST['tipo-curso-descripcion'] ?? null;
+    switch ($accion) {
         case 'create':
-            $model->setName($name);
-            $model->setDescription($description);
+            $model->setNombre($nombre);
+            $model->setDescripcion($descripcion);
             if ($service->add($model)) {
                 echo 'Registro agregado correctamente';
             }
@@ -31,8 +31,8 @@ if ($_POST) {
             break;
         case 'update':
             $model->setId((int)$id);
-            $model->setName($name);
-            $model->setDescription($description);
+            $model->setNombre($nombre);
+            $model->setDescripcion($descripcion);
             if ($service->update($model)) {
                 echo 'Registro actualizado correctamente';
             }
@@ -43,23 +43,23 @@ if ($_POST) {
                 $json = array();
                 $json[] = array(
                     'id' => $model->getId(),
-                    'name' => $model->getName(),
-                    'description' => $model->getDescription(),
+                    'nombre' => $model->getNombre(),
+                    'descripcion' => $model->getDescripcion(),
                 );
                 $jsonstring = json_encode($json[0]);
                 echo $jsonstring;
             }
             break;
         default:
-            echo 'No valid option';
+            echo 'Opción no válida';
     }
 } else {
     $json = array();
     foreach ($service->getAll() as $row) {
         $json[] = array(
             'id' => $row->getId(),
-            'name' => $row->getName(),
-            'description' => $row->getDescription(),
+            'nombre' => $row->getNombre(),
+            'descripcion' => $row->getDescripcion(),
         );
     }
     $jsonstring = json_encode($json);

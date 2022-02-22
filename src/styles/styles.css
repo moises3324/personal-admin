@@ -28,7 +28,7 @@ header {
     color: #FFFFFF;
 }
 
-header .sectionTitle h2 {
+header #page-title h2 {
     margin-left: var(--asideWidth);
     font-weight: bold;
 }
@@ -42,7 +42,7 @@ main {
     transform: rotate(180deg);
 }
 
-.menuItem button,
+header, .menuItem button,
 td {
     display: flex;
     align-items: center;
@@ -62,6 +62,16 @@ td .material-icons,
     position: fixed;
     right: calc(50% - calc(400px / 2));
     top: calc(var(--headerHeight) + 10px);
+}
+
+.section-header .section-title
+{
+    font-size: 24px;
+}
+
+#personal-data-header #personal-data-title,
+#hire-data-header, #hire-data-title{
+    font-size: 20px;
 }
 
 .menuItem .menuItemText {

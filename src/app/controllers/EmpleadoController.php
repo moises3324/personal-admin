@@ -3,76 +3,68 @@
 include_once '../models/Empleado.php';
 include_once '../services/EmpleadoService.php';
 
-$model = new Empleado();
-$service = new EmpleadoService();
+$empleado = new Empleado();
+$empleadoService = new EmpleadoService();
 
-$action = "";
-$id = "";
-$names = "";
-$fatherLastName = "";
-$motherLastName = "";
-$rut = "";
+$accion = "";
+//variables empleado
+$empleado_id = "";
+$empleado_rut = "";
+$empleado_nombres = "";
+$empleado_apellido_paterno = "";
+$empleado_apellido_materno = "";
 
 if ($_POST) {
-    $action = $_POST['action'] ?? null;
-    $id = $_POST['empleado-id'] ?? null;
-    $names = $_POST['empleado-names'] ?? null;
-    $fatherLastName = $_POST['empleado-father-last-name'] ?? null;
-    $motherLastName = $_POST['empleado-mother-last-name'] ?? null;
-    $rut = $_POST['empleado-rut'] ?? null;
+    $accion = $_POST['accion'] ?? null;
+    $empleado_id = $_POST['empleado-id'] ?? null;
+    $empleado_rut = $_POST['empleado-rut'] ?? null;
+    $empleado_nombres = $_POST['empleado-nombres'] ?? null;
+    $empleado_apellido_paterno = $_POST['empleado-apellido-paterno'] ?? null;
+    $empleado_apellido_materno = $_POST['empleado-apellido-materno'] ?? null;
 
-    switch ($action) {
-        case 'create':
-            $model->setNames($names);
-            $model->setFatherLastName($fatherLastName);
-            $model->setMotherLastName($motherLastName);
-            $model->setRut($rut);
-            if ($service->add($model)) {
-                echo 'Registro agregado correctamente';
-            }
-            break;
+    switch ($accion) {
         case 'delete':
-            if ($service->delete($id)) {
+            if ($$empleadoService->delete($empleado_id)) {
                 echo 'Registro eliminado correctamente';
             }
             break;
         case 'update':
-            $model->setId((int)$id);
-            $model->setNames($names);
-            $model->setFatherLastName($fatherLastName);
-            $model->setMotherLastName($motherLastName);
-            $model->setRut($rut);
-            if ($service->update($model)) {
+            $empleado->setId((int)$empleado_id);
+            $empleado->setNombres($nombres);
+            $empleado->setApellidoPaterno($apellido_paterno);
+            $empleado->setApellidoMaterno($apellido_materno);
+            $empleado->setRut($rut);
+            if ($empleadoService->update($empleado)) {
                 echo 'Registro actualizado correctamente';
             }
             break;
         case 'getOne':
-            $model = $service->getOneById($id);
-            if ($model != null) {
+            $empleado = $empleadoService->getOneById($empleado_id);
+            if ($empleado != null) {
                 $json = array();
                 $json[] = array(
-                    'id' => $model->getId(),
-                    'rut' => $model->getRut(),
-                    'names' => $model->getNames(),
-                    'fatherLastName' => $model->getFatherLastName(),
-                    'motherLastName' => $model->getMotherLastName(),
+                    'id' => $empleado->getId(),
+                    'rut' => $empleado->getRut(),
+                    'nombres' => $empleado->getNombres(),
+                    'apellido_paterno' => $empleado->getApellidoPaterno(),
+                    'apellido_materno' => $empleado->getApellidoMaterno()
                 );
                 $jsonstring = json_encode($json[0]);
                 echo $jsonstring;
             }
             break;
         default:
-            echo 'No valid option';
+            echo 'Opción no válida';
     }
 } else {
     $json = array();
-    foreach ($service->getAll() as $row) {
+    foreach ($empleadoService->getAll() as $row) {
         $json[] = array(
             'id' => $row->getId(),
             'rut' => $row->getRut(),
-            'names' => $row->getNames(),
-            'fatherLastName' => $row->getFatherLastName(),
-            'motherLastName' => $row->getMotherLastName(),
+            'nombres' => $row->getNombres(),
+            'apellido_paterno' => $row->getApellidoPaterno(),
+            'apellido_materno' => $row->getApellidoMaterno()
         );
     }
     $jsonstring = json_encode($json);

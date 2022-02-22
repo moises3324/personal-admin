@@ -3,7 +3,7 @@
 class Curso
 {
     private int $id;
-    private string $date_of_expiration;
+    private string $fecha_vencimiento;
     private int $tipo_curso_id;
     private int $empleado_id;
 
@@ -30,17 +30,17 @@ class Curso
     /**
      * @return string
      */
-    public function getDateOfExpiration(): string
+    public function getFechaVencimiento(): string
     {
-        return $this->date_of_expiration;
+        return $this->fecha_vencimiento;
     }
 
     /**
-     * @param string $date_of_expiration
+     * @param string $fecha_vencimiento
      */
-    public function setDateOfExpiration(string $date_of_expiration): void
+    public function setFechaVencimiento(string $fecha_vencimiento): void
     {
-        $this->date_of_expiration = $date_of_expiration;
+        $this->fecha_vencimiento = $fecha_vencimiento;
     }
 
     /**

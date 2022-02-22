@@ -7,16 +7,16 @@ class ExamenService
 
     public function add(Examen $examen): bool
     {
-        $date_of_expiration = $examen->getDateOfExpiration();
+        $fecha_vencimiento = $examen->getFechaVencimiento();
         $tipo_examen_id = $examen->getTipoExamenId();
         $empleado_id = $examen->getEmpleadoId();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
             $query = "INSERT INTO examen 
-                VALUES(null, :date_of_expiration, :tipo_examen_id, :empleado_id)";
+                VALUES(null, :fecha_vencimiento, :tipo_examen_id, :empleado_id)";
             $stmt = $transaction->prepare($query);
-            $stmt->bindParam(":date_of_expiration", $date_of_expiration);
+            $stmt->bindParam(":fecha_vencimiento", $fecha_vencimiento);
             $stmt->bindParam(":tipo_examen_id", $tipo_examen_id);
             $stmt->bindParam(":empleado_id", $empleado_id);
             $stmt->execute();
@@ -49,20 +49,20 @@ class ExamenService
     public function update(examen $examen): bool
     {
         $id = $examen->getId();
-        $$date_of_expiration = $examen->getDateOfExpiration();
+        $$fecha_vencimiento = $examen->getFechaVencimiento();
         $tipo_examen_id = $examen->getTipoExamenId();
         $empleado_id = $examen->getEmpleadoId();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
             $query = "UPDATE examen 
-                SET date_of_expiration = :date_of_expiration,
+                SET fecha_vencimiento = :fecha_vencimiento,
                     tipo_examen_id = :tipo_examen_id,
                     empleado_id = :empleado_id
                 WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":date_of_expiration", $date_of_expiration);
+            $stmt->bindParam(":fecha_vencimiento", $fecha_vencimiento);
             $stmt->bindParam(":tipo_examen_id", $tipo_examen_id);
             $stmt->bindParam(":empleado_id", $empleado_id);
             $stmt->execute();
@@ -86,7 +86,7 @@ class ExamenService
             $stmt->execute();
             $row = $stmt->fetch();
             $examen->setId($row['id']);
-            $examen->setDateOfExpiration($row['date_of_expiration']);
+            $examen->setFechaVencimiento($row['fecha_vencimiento']);
             $examen->setTipoexamenId($row['tipo_examen_id']);
             $examen->setEmpleadoId($row['empleado_id']);
         } catch (PDOException $e) {
@@ -109,7 +109,7 @@ class ExamenService
             foreach ($rows as $row) {
                 $examen = new examen();
                 $examen->setId($row['id']);
-                $examen->setDateOfExpiration($row['date_of_expiration']);
+                $examen->setFechaVencimiento($row['fecha_vencimiento']);
                 $examen->setTipoexamenId($row['tipo_examen_id']);
                 $examen->setEmpleadoId($row['empleado_id']);
                 array_push($examenList, $examen);

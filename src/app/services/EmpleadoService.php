@@ -4,38 +4,6 @@ include_once '../models/Empleado.php';
 
 class EmpleadoService
 {
-    public function add(Empleado $empleado): bool
-    {
-        $names = $empleado->getNames();
-        $fatherLastName = $empleado->getFatherLastName();
-        $motherLastName = $empleado->getMotherLastName();
-        $rut = $empleado->getRut();
-        $conn = new Connection();
-        try {
-            $transaction = $conn->getConnection();
-            $query = "INSERT INTO empleado 
-                    VALUES(
-                           null, 
-                           :rut, 
-                           :names, 
-                           :father_last_name, 
-                           :mother_last_name
-                           )";
-            $stmt = $transaction->prepare($query);
-            $stmt->bindParam(":rut", $rut);
-            $stmt->bindParam(":names", $names);
-            $stmt->bindParam(":father_last_name", $fatherLastName);
-            $stmt->bindParam(":mother_last_name", $motherLastName);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return false;
-        } finally {
-            $conn = null;
-        }
-    }
-
     public function delete(int $id): bool
     {
         $conn = new Connection();
@@ -56,26 +24,25 @@ class EmpleadoService
     public function update(Empleado $empleado): bool
     {
         $id = $empleado->getId();
-        $names = $empleado->getNames();
-        $fatherLastName = $empleado->getFatherLastName();
-        $motherLastName = $empleado->getMotherLastName();
+        $nombres = $empleado->getNombres();
+        $apellido_paterno = $empleado->getApellidoPaterno();
+        $apellido_materno = $empleado->getApellidoMaterno();
         $rut = $empleado->getRut();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
             $query = "UPDATE empleado 
-                    SET  
-                        rut = :rut, 
-                        names = :names, 
-                        father_last_name = :father_last_name, 
-                        mother_last_bame = :mother_last_name
-                    WHERE id = :id";
+                        SET rut = :rut, 
+                            nombres = :nombres, 
+                            apellido_paterno = :apellido_paterno, 
+                            mother_last_bame = :apellido_materno
+                        WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":rut", $rut);
-            $stmt->bindParam(":names", $names);
-            $stmt->bindParam(":father_last_name", $fatherLastName);
-            $stmt->bindParam(":mother_last_name", $motherLastName);
+            $stmt->bindParam(":nombres", $nombres);
+            $stmt->bindParam(":apellido_paterno", $apellido_paterno);
+            $stmt->bindParam(":apellido_materno", $apellido_materno);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -97,12 +64,12 @@ class EmpleadoService
             $stmt->execute();
             $row = $stmt->fetch();
             $empleado->setId($row['id']);
-            $empleado->setNames($row['names']);
-            $empleado->setFatherLastName($row['father_last_name']);
-            $empleado->setMotherLastName($row['mother_last_name']);
             $empleado->setRut($row['rut']);
+            $empleado->setNombres($row['nombres']);
+            $empleado->setApellidoPaterno($row['apellido_paterno']);
+            $empleado->setApellidoMaterno($row['apellido_materno']);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo 'Error: ' + $e->getMessage();
         } finally {
             $conn = null;
         }
@@ -115,20 +82,20 @@ class EmpleadoService
         $empleadoList = array();
         try {
             $transaction = $conn->getConnection();
-            $stmt = $transaction->prepare("SELECT * FROM empleado order by names");
+            $stmt = $transaction->prepare("SELECT * FROM empleado");
             $stmt->execute();
             $rows = $stmt->fetchAll();
             foreach ($rows as $row) {
                 $empleado = new Empleado();
                 $empleado->setId($row['id']);
-                $empleado->setNames($row['names']);
-                $empleado->setFatherLastName($row['father_last_name']);
-                $empleado->setMotherLastName($row['mother_last_name']);
                 $empleado->setRut($row['rut']);
+                $empleado->setNombres($row['nombres']);
+                $empleado->setApellidoPaterno($row['apellido_paterno']);
+                $empleado->setApellidoMaterno($row['apellido_materno']);
                 array_push($empleadoList, $empleado);
             }
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo 'Error: ' + $e->getMessage();
         } finally {
             $conn = null;
         }

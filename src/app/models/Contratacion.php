@@ -3,8 +3,7 @@
 class Contratacion
 {
     private int $id;
-    private string $start_date;
-    private string $end_date;
+    private string $fecha_termino;
     private int $tipo_contrato_id;
     private int $centro_costo_id;
     private int $empleado_id;
@@ -32,33 +31,17 @@ class Contratacion
     /**
      * @return string
      */
-    public function getStartDate(): string
+    public function getFechaTermino(): string
     {
-        return $this->start_date;
+        return $this->fecha_termino;
     }
 
     /**
-     * @param string $start_date
+     * @param string $fecha_termino
      */
-    public function setStartDate(string $start_date): void
+    public function setFechaTermino(string $fecha_termino): void
     {
-        $this->start_date = $start_date;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndDate(): string
-    {
-        return $this->end_date;
-    }
-
-    /**
-     * @param string $end_date
-     */
-    public function setEndDate(string $end_date): void
-    {
-        $this->end_date = $end_date;
+        $this->fecha_termino = $fecha_termino;
     }
 
     /**
@@ -88,7 +71,7 @@ class Contratacion
     /**
      * @param int $centro_costo_id
      */
-    public function setCentoCostoid(int $centro_costo_id): void
+    public function setCentoCostoId(int $centro_costo_id): void
     {
         $this->centro_costo_id = $centro_costo_id;
     }

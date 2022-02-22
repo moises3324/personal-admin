@@ -3,8 +3,8 @@
 class TipoExamen
 {
     private int $id;
-    private string $name;
-    private string $description;
+    private string $nombre;
+    private string $descripcion;
 
     public function __construct()
     {
@@ -29,32 +29,32 @@ class TipoExamen
     /**
      * @return string
      */
-    public function getName(): string
+    public function getNombre(): string
     {
-        return $this->name;
+        return $this->nombre;
     }
 
     /**
-     * @param string $name
+     * @param string $nombre
      */
-    public function setName(string $name): void
+    public function setNombre(string $nombre): void
     {
-        $this->name = $name;
+        $this->nombre = $nombre;
     }
 
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescripcion(): string
     {
-        return $this->description;
+        return $this->descripcion;
     }
 
     /**
-     * @param string $description
+     * @param string $descripcion
      */
-    public function setDescription(string $description): void
+    public function setDescripcion(string $descripcion): void
     {
-        $this->description = $description;
+        $this->descripcion = $descripcion;
     }
 }

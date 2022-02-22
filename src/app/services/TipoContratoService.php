@@ -6,15 +6,15 @@ class TipoContratoService
 {
     public function add(TipoContrato $tipoContrato): bool
     {
-        $name = $tipoContrato->getName();
-        $description = $tipoContrato->getDescription();
+        $nombre = $tipoContrato->getNombre();
+        $descripcion = $tipoContrato->getDescripcion();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
-            $query = "INSERT INTO tipo_contrato VALUES(null, :name, :description)";
+            $query = "INSERT INTO tipo_contrato VALUES(null, :nombre, :descripcion)";
             $stmt = $transaction->prepare($query);
-            $stmt->bindParam(":name", $name);
-            $stmt->bindParam(":description", $description);
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":descripcion", $descripcion);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -45,16 +45,16 @@ class TipoContratoService
     public function update(TipoContrato $tipoContrato): bool
     {
         $id = $tipoContrato->getId();
-        $name = $tipoContrato->getName();
-        $description = $tipoContrato->getDescription();
+        $nombre = $tipoContrato->getNombre();
+        $descripcion = $tipoContrato->getDescripcion();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
-            $query = "UPDATE tipo_contrato SET name = :name, description = :description WHERE id = :id";
+            $query = "UPDATE tipo_contrato SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":name", $name);
-            $stmt->bindParam(":description", $description);
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":descripcion", $descripcion);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -76,8 +76,8 @@ class TipoContratoService
             $stmt->execute();
             $row = $stmt->fetch();
             $tipoContrato->setId($row['id']);
-            $tipoContrato->setName($row['name']);
-            $tipoContrato->setDescription($row['description']);
+            $tipoContrato->setNombre($row['nombre']);
+            $tipoContrato->setDescripcion($row['descripcion']);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {
@@ -92,14 +92,14 @@ class TipoContratoService
         $tipoContratoList = array();
         try {
             $transaction = $conn->getConnection();
-            $stmt = $transaction->prepare("SELECT * FROM tipo_contrato order by name");
+            $stmt = $transaction->prepare("SELECT * FROM tipo_contrato");
             $stmt->execute();
             $rows = $stmt->fetchAll();
             foreach ($rows as $row) {
                 $tipoContrato = new TipoContrato();
                 $tipoContrato->setId($row['id']);
-                $tipoContrato->setName($row['name']);
-                $tipoContrato->setDescription($row['description']);
+                $tipoContrato->setNombre($row['nombre']);
+                $tipoContrato->setDescripcion($row['descripcion']);
                 array_push($tipoContratoList, $tipoContrato);
             }
         } catch (PDOException $e) {

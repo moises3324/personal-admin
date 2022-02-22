@@ -4,9 +4,9 @@ class Empleado
 {
     private int $id;
     private string $rut;
-    private string $names;
-    private string $father_last_name;
-    private string $mother_last_name;
+    private string $nombres;
+    private string $apellido_paterno;
+    private string $apellido_materno;
 
     public function __construct()
     {
@@ -47,48 +47,48 @@ class Empleado
     /**
      * @return string
      */
-    public function getNames(): string
+    public function getNombres(): string
     {
-        return $this->names;
+        return $this->nombres;
     }
 
     /**
-     * @param string $names
+     * @param string $nombres
      */
-    public function setNames(string $names): void
+    public function setNombres(string $nombres): void
     {
-        $this->names = $names;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFatherLastName(): string
-    {
-        return $this->father_last_name;
-    }
-
-    /**
-     * @param string $father_last_name
-     */
-    public function setFatherLastName(string $father_last_name): void
-    {
-        $this->father_last_name = $father_last_name;
+        $this->nombres = $nombres;
     }
 
     /**
      * @return string
      */
-    public function getMotherLastName(): string
+    public function getApellidoPaterno(): string
     {
-        return $this->mother_last_name;
+        return $this->apellido_paterno;
     }
 
     /**
-     * @param string $mother_last_name
+     * @param string $apellido_paterno
      */
-    public function setMotherLastName(string $mother_last_name): void
+    public function setApellidoPaterno(string $apellido_paterno): void
     {
-        $this->mother_last_name = $mother_last_name;
+        $this->apellido_paterno = $apellido_paterno;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApellidoMaterno(): string
+    {
+        return $this->apellido_materno;
+    }
+
+    /**
+     * @param string $apellido_materno
+     */
+    public function setApellidoMaterno(string $apellido_materno): void
+    {
+        $this->apellido_materno = $apellido_materno;
     }
 }

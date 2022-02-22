@@ -7,16 +7,16 @@ class CursoService
 
     public function add(Curso $curso): bool
     {
-        $date_of_expiration = $curso->getDateOfExpiration();
+        $fecha_vencimiento = $curso->getFechaVencimiento();
         $tipo_curso_id = $curso->getTipoCursoId();
         $empleado_id = $curso->getEmpleadoId();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
             $query = "INSERT INTO curso 
-                VALUES(null, :date_of_expiration, :tipo_curso_id, :empleado_id)";
+                VALUES(null, :fecha_vencimiento, :tipo_curso_id, :empleado_id)";
             $stmt = $transaction->prepare($query);
-            $stmt->bindParam(":date_of_expiration", $date_of_expiration);
+            $stmt->bindParam(":fecha_vencimiento", $fecha_vencimiento);
             $stmt->bindParam(":tipo_curso_id", $tipo_curso_id);
             $stmt->bindParam(":empleado_id", $empleado_id);
             $stmt->execute();
@@ -49,20 +49,20 @@ class CursoService
     public function update(curso $curso): bool
     {
         $id = $curso->getId();
-        $$date_of_expiration = $curso->getDateOfExpiration();
+        $$fecha_vencimiento = $curso->getFechaVencimiento();
         $tipo_curso_id = $curso->getTipoCursoId();
         $empleado_id = $curso->getEmpleadoId();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
             $query = "UPDATE curso 
-                SET date_of_expiration = :date_of_expiration,
+                SET fecha_vencimiento = :fecha_vencimiento,
                     tipo_curso_id = :tipo_curso_id,
                     empleado_id = :empleado_id
                 WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":date_of_expiration", $date_of_expiration);
+            $stmt->bindParam(":fecha_vencimiento", $fecha_vencimiento);
             $stmt->bindParam(":tipo_curso_id", $tipo_curso_id);
             $stmt->bindParam(":empleado_id", $empleado_id);
             $stmt->execute();
@@ -86,7 +86,7 @@ class CursoService
             $stmt->execute();
             $row = $stmt->fetch();
             $curso->setId($row['id']);
-            $curso->setDateOfExpiration($row['date_of_expiration']);
+            $curso->setFechaVencimiento($row['fecha_vencimiento']);
             $curso->setTipoCursoId($row['tipo_curso_id']);
             $curso->setEmpleadoId($row['empleado_id']);
         } catch (PDOException $e) {
@@ -109,7 +109,7 @@ class CursoService
             foreach ($rows as $row) {
                 $curso = new curso();
                 $curso->setId($row['id']);
-                $curso->setDateOfExpiration($row['date_of_expiration']);
+                $curso->setFechaVencimiento($row['fecha_vencimiento']);
                 $curso->setTipoCursoId($row['tipo_curso_id']);
                 $curso->setEmpleadoId($row['empleado_id']);
                 array_push($cursoList, $curso);

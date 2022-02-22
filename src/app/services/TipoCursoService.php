@@ -6,15 +6,15 @@ class TipoCursoService
 {
     public function add(TipoCurso $tipoCurso): bool
     {
-        $name = $tipoCurso->getName();
-        $description = $tipoCurso->getDescription();
+        $nombre = $tipoCurso->getNombre();
+        $descripcion = $tipoCurso->getDescripcion();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
-            $query = "INSERT INTO tipo_curso VALUES(null, :name, :description)";
+            $query = "INSERT INTO tipo_curso VALUES(null, :nombre, :descripcion)";
             $stmt = $transaction->prepare($query);
-            $stmt->bindParam(":name", $name);
-            $stmt->bindParam(":description", $description);
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":descripcion", $descripcion);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -45,16 +45,16 @@ class TipoCursoService
     public function update(TipoCurso $tipoCurso): bool
     {
         $id = $tipoCurso->getId();
-        $name = $tipoCurso->getName();
-        $description = $tipoCurso->getDescription();
+        $nombre = $tipoCurso->getNombre();
+        $descripcion = $tipoCurso->getDescripcion();
         $conn = new Connection();
         try {
             $transaction = $conn->getConnection();
-            $query = "UPDATE tipo_curso SET name = :name, description = :description WHERE id = :id";
+            $query = "UPDATE tipo_curso SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
             $stmt = $transaction->prepare($query);
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":name", $name);
-            $stmt->bindParam(":description", $description);
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":descripcion", $descripcion);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -76,8 +76,8 @@ class TipoCursoService
             $stmt->execute();
             $row = $stmt->fetch();
             $tipoCurso->setId($row['id']);
-            $tipoCurso->setName($row['name']);
-            $tipoCurso->setDescription($row['description']);
+            $tipoCurso->setNombre($row['nombre']);
+            $tipoCurso->setDescripcion($row['descripcion']);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {
@@ -92,14 +92,14 @@ class TipoCursoService
         $tipoCursoList = array();
         try {
             $transaction = $conn->getConnection();
-            $stmt = $transaction->prepare("SELECT * FROM tipo_curso order by name");
+            $stmt = $transaction->prepare("SELECT * FROM tipo_curso");
             $stmt->execute();
             $rows = $stmt->fetchAll();
             foreach ($rows as $row) {
                 $tipoCurso = new TipoCurso();
                 $tipoCurso->setId($row['id']);
-                $tipoCurso->setName($row['name']);
-                $tipoCurso->setDescription($row['description']);
+                $tipoCurso->setNombre($row['nombre']);
+                $tipoCurso->setDescripcion($row['descripcion']);
                 array_push($tipoCursoList, $tipoCurso);
             }
         } catch (PDOException $e) {

@@ -1,261 +1,118 @@
 //----- ASSIGNMENTS -----
-const urlEmpleado = "../app/controllers/EmpleadoController.php"
+const urlEmpleadoContratacion = "../app/controllers/EmpleadoContratacionController.php"
 const urlCentroCosto = "../app/controllers/CentroCostoController.php"
-const urlTipoExamen = "../app/controllers/TipoExamenController.php"
-const urlTipoCurso = "../app/controllers/TipoCursoController.php"
-const urlTipoContrato = "../app/controllers/TipoContrato.php"
+const urlTipoContrato = "../app/controllers/TipoContratoController.php"
 
 const empleadoId = document.querySelector("#empleado-id")
-const empleadoName = document.querySelector("#empleado-names")
-const empleadoFatherLastName = document.querySelector("#empleado-father-last-name")
-const empleadoMotherLastName = document.querySelector("#empleado-mother-last-name")
 const empleadoRut = document.querySelector("#empleado-rut")
+const empleadoNames = document.querySelector("#empleado-nombres")
+const empleadoApellidoPaterno = document.querySelector("#empleado-apellido-paterno")
+const empleadoApellidoMaterno = document.querySelector("#empleado-apellido-materno")
 
+const contratacionTipoContratoOpcion = document.querySelector("#contratacion-tipo-contrato-opcion")
 const contratacionCentroCostoOpcion = document.querySelector("#contratacion-centro-costo-opcion")
-const contratacionInicioInput = document.querySelector("#contratacion-inicio-input")
-
-const examenTipoExamenOpcion = document.querySelector("#examen-tipo-examen-opcion")
-const examenFechaExpiracionInput = document.querySelector("#examen-fecha-expiracion-input")
-const agregarExamenBoton = document.querySelector("#agregar-examen-boton")
-
-const cursosTipoCursoOpcion = document.querySelector("#cursos-tipo-curso-opcion")
-const cursoFechaExpiracionInput = document.querySelector("#cursos-fecha-expiracion-input")
-const agregarCursoBoton = document.querySelector("#agregar-curso-boton")
-
-let listaCursosSeleccionados = document.querySelector("#cursos-data-list-items")
-let listaExamenesSeleccionados = document.querySelector("#examenes-data-list-items")
-
-let cursosSeleccionados = new Array();
-let examenesSeleccinados = new Array();
+const contratacionTerminoInput = document.querySelector("#contratacion-termino-input")
 
 
 //----- ACTIONS -----
 //When the page is loaded
 window.addEventListener("load", () => {
     callGetAllCentrosCosto()
-    callGetAllExamenes()
-    callGetAllCursos()
+    callGetAllTipoContrato()
     formDefault()
 })
 
 
 //When the button "Agregar" or "Actualizar" is clicked in the record modal
 btnSave.addEventListener("click", () => {
-    let formData = new FormData()
-    console.log(empleadoId.value)
-    console.log(empleadoRut.value)
-    console.log(empleadoName.value)
-    console.log(empleadoFatherLastName.value)
-    console.log(empleadoMotherLastName.value)
-    console.log(contratacionCentroCostoOpcion.selectedIndex)
-    console.log(contratacionInicioInput.value)
-    cursosSeleccionados.forEach(curso => {
-        console.log(curso.valor + " " + curso.fechaExpiracion)
-    });
-    examenesSeleccinados.forEach(examen => {
-        console.log(examen.valor + " " + examen.fechaExpiracion)
-    });
-
-    // if (btnSave.textContent === "Agregar") {
-    //     formData.append("action", "create")
-    //     callAddEmpleado(formData)
-    // } else {
-    //     formData.append("action", "update")
-    //     callUpdateEmpleado(formData)
-    // }
-})
-
-agregarCursoBoton.addEventListener("click", () => {
-    let obj = {
-        "curso": cursosTipoCursoOpcion.options[cursosTipoCursoOpcion.selectedIndex].text,
-        "valor": cursosTipoCursoOpcion.selectedIndex,
-        "fechaExpiracion": cursoFechaExpiracionInput.value
-    }
-    agregarCurso(obj)
-})
-
-agregarExamenBoton.addEventListener("click", () => {
-    let obj = {
-        "examen": examenTipoExamenOpcion.options[examenTipoExamenOpcion.selectedIndex].text,
-        "valor": examenTipoExamenOpcion.selectedIndex,
-        "fechaExpiracion": examenFechaExpiracionInput.value
-    }
-    agregarExamen(obj)
-})
-
-listaCursosSeleccionados.addEventListener("click", (e) => {
-    if (e.target.classList.contains("deleteCursoButton")) {
-        const itemId = e.target.getAttribute("data-id")
-        cursosSeleccionados.splice(itemId, 1)
-    }
-    cursosList(cursosSeleccionados)
-})
-
-listaExamenesSeleccionados.addEventListener("click", (e) => {
-    if (e.target.classList.contains("deleteExamenButton")) {
-        const itemId = e.target.getAttribute("data-id")
-        examenesSeleccinados.splice(itemId, 1)
-    }
-    examenesList(examenesSeleccinados)
-})
-
-contratacionCentroCostoOpcion.addEventListener("change", () => {
-    if (contratacionInicioInput.hasAttribute("disabled")) {
-        contratacionInicioInput.attributes.removeNamedItem("disabled")
-    }
-})
-
-cursosTipoCursoOpcion.addEventListener("change", () => {
-    if (cursoFechaExpiracionInput.hasAttribute("disabled")) {
-        cursoFechaExpiracionInput.attributes.removeNamedItem("disabled")
-    }
-})
-
-cursoFechaExpiracionInput.addEventListener("change", () => {
-    if (agregarCursoBoton.hasAttribute("disabled")) {
-        agregarCursoBoton.attributes.removeNamedItem("disabled")
-    }
-})
-
-examenTipoExamenOpcion.addEventListener("change", () => {
-    if (examenFechaExpiracionInput.hasAttribute("disabled")) {
-        examenFechaExpiracionInput.attributes.removeNamedItem("disabled")
-    }
-})
-
-examenFechaExpiracionInput.addEventListener("change", () => {
-    if (agregarExamenBoton.hasAttribute("disabled")) {
-        agregarExamenBoton.attributes.removeNamedItem("disabled")
-    }
+    addEmployee()
 })
 
 
 //----- FUNCTIONS -----
-//Generate a table with the records required
+function addEmployee(){   
+    let arrayErrores = new Array()
+    if (empleadoRut.value.trim() === ""){
+        arrayErrores.push("Debes ingresar un rut")
+    } 
+    if(empleadoNames.value.trim() === ""){
+        arrayErrores.push("Debes ingresar al menos un nombre")
+    }
+    if(empleadoApellidoPaterno.value.trim() === ""){
+        arrayErrores.push("Debes ingresar al menos el apellido paterno")
+    }
+    if(contratacionTipoContratoOpcion.selectedIndex === 0){
+        arrayErrores.push("Debes seleccionar un tipo de contrato")
+    }
+    if(contratacionCentroCostoOpcion.selectedIndex === 0){
+        arrayErrores.push("Debes seleccionar un centro de costo")
+    }
+    if(contratacionTerminoInput.value.trim() === ""){
+        arrayErrores.push("Debes ingresar indicar una fecha de término del contrato")
+    }
+
+    //validar si hay errores en el arreglo
+    if(arrayErrores.length > 0){
+        let mensajeError = ""
+        arrayErrores.forEach(error =>{
+            mensajeError+= "-"+error+"\n"
+        })
+        alert(mensajeError)
+        return false
+    } 
+
+    let formData = new FormData()
+    formData.append("accion", "create")
+    formData.append("empleado-id", empleadoId.value)
+    formData.append("empleado-rut", empleadoRut.value.trim())
+    formData.append("empleado-nombres", empleadoNames.value.trim())
+    formData.append("empleado-apellido-paterno", empleadoApellidoPaterno.value.trim())
+    formData.append("empleado-apellido-materno", empleadoApellidoMaterno.value.trim())
+    formData.append("contratacion-tipo-contrato-id", contratacionTipoContratoOpcion.selectedIndex)
+    formData.append("contratacion-centro-costo-id", contratacionCentroCostoOpcion.selectedIndex)
+    formData.append("contratacion-fecha-termino", contratacionTerminoInput.value.trim())
+
+    callAddEmpleado(formData)
+
+    formDefault()
+}
+
 function fillCentroCostoOptions(records) {
     let template = '<option value="" disabled selected>Elija una opción</option>';
     records.forEach(record => {
         template += `
-            <option value="${record.id}">${record.name}</option>
+            <option value="${record.id}">${record.nombre}</option>
         `
     })
     contratacionCentroCostoOpcion.innerHTML = template
 }
 
-function fillExamenOptions(records) {
+function fillTipoContratoOptions(records) {
     let template = '<option value="" disabled selected>Elija una opción</option>';
     records.forEach(record => {
         template += `
-            <option value="${record.id}">${record.name}</option>
+            <option value="${record.id}">${record.nombre}</option>
         `
     })
-    examenTipoExamenOpcion.innerHTML = template
-}
-
-function fillCursosOptions(records) {
-    let template = '<option value="" disabled selected>Elija una opción</option>';
-    records.forEach(record => {
-        template += `
-            <option value="${record.id}">${record.name}</option>
-        `
-    })
-    cursosTipoCursoOpcion.innerHTML = template
-}
-
-function agregarCurso(item) {
-    cursosSeleccionados.push(item)
-    cursosList(cursosSeleccionados)
-}
-
-function agregarExamen(item) {
-    examenesSeleccinados.push(item)
-    examenesList(examenesSeleccinados)
-}
-
-function cursosList(records) {
-    let template = ''
-
-    if (records.length > 0) {
-        listaCursosSeleccionados.classList.add("w3-border")
-
-        records.forEach(record => {
-            template += `
-                <li class="w3-display-container">
-                    <span>Nombre: ${record.curso}</span><br>
-                    <span>Fecha expiración: ${record.fechaExpiracion}</span>
-                    <span class="w3-button w3-display-right deleteCursoButton" 
-                        data-id="${records.indexOf(record)}">
-                        &times;
-                    </span>
-                </li>
-            `
-        })
-    } else {
-        listaCursosSeleccionados.classList.remove("w3-border")
-
-        template += `Sin cursos aún`
-    }
-
-    listaCursosSeleccionados.innerHTML = template
-}
-
-function examenesList(records) {
-    if (records.length > 0) {
-        listaExamenesSeleccionados.classList.add("w3-border")
-    } else {
-        listaExamenesSeleccionados.classList.remove("w3-border")
-    }
-
-    let template = ''
-    records.forEach(record => {
-        template += `
-            <li class="w3-display-container">
-                <span>Nombre: ${record.examen}</span><br>
-                <span>Fecha expiración: ${record.fechaExpiracion}</span>
-                <span class="w3-button w3-display-right deleteExamenButton" 
-                    data-id="${records.indexOf(record)}">
-                    &times;
-                </span>
-            </li>
-        `
-    })
-    listaExamenesSeleccionados.innerHTML = template
-}
-
-
-//Show the selected record information in the record modal (edit mode)
-function showRecordInformation(data) {
-    empleadoId.value = data.id
-    empleadoName.value = data.names
-    empleadoFatherLastName.value = data.fatherLastName
-    empleadoMotherLastName.value = data.motherLastName
-    empleadoRut.value = data.rut
-
-    moreInfoModalTitle.innerHTML = data.names + " " + data.fatherLastName + " " + data.motherLastName
+    contratacionTipoContratoOpcion.innerHTML = template
 }
 
 //clear up the inputs in the form
-function clearInputs() {
-    const formElements = document.forms['empleadoForm']
-    for (let element of formElements) {
-        element.value = ''
-    }
-}
-
 function formDefault() {
-    clearInputs()
-    agregarCursoBoton.setAttribute("disabled", true)
-    agregarExamenBoton.setAttribute("disabled", true)
-    contratacionInicioInput.setAttribute("disabled", true)
-    cursoFechaExpiracionInput.setAttribute("disabled", true)
-    examenFechaExpiracionInput.setAttribute("disabled", true)
+    empleadoId.value = ""
+    empleadoRut.value = ""
+    empleadoNames.value = ""
+    empleadoApellidoPaterno.value = ""
+    empleadoApellidoMaterno.value = ""
+    contratacionTipoContratoOpcion.selectedIndex = 0
+    contratacionCentroCostoOpcion.selectedIndex = 0
+    contratacionTerminoInput.value = ""
 }
 
 
 //----- CALLS -----
 const callDeleteEmpleado = (record) => {
-    deleteRecord(record, urlEmpleado).then(response => response.text()).then(data => {
-        callGetAllEmpleados(urlEmpleado)
+    deleteRecord(record, urlEmpleadoContratacion).then(response => response.text()).then(data => {
         handleResponseAlert(data)
     }).catch(error => {
         console.log(error)
@@ -263,7 +120,7 @@ const callDeleteEmpleado = (record) => {
 }
 
 const callGetEmpleado = (record) => {
-    getRecord(record, urlEmpleado).then(response => response.json()).then(data => {
+    getRecord(record, urlEmpleadoContratacion).then(response => response.json()).then(data => {
         showRecordInformation(data)
     }).catch(error => {
         console.log(error)
@@ -271,8 +128,7 @@ const callGetEmpleado = (record) => {
 }
 
 const callAddEmpleado = (record) => {
-    addRecord(record, urlEmpleado).then(response => response.text()).then(data => {
-        callGetAllEmpleados(urlEmpleado)
+    addRecord(record, urlEmpleadoContratacion).then(response => response.text()).then(data => {
         handleResponseAlert(data)
     }).catch(error => {
         console.log(error)
@@ -280,8 +136,7 @@ const callAddEmpleado = (record) => {
 }
 
 const callUpdateEmpleado = (record) => {
-    updateRecord(record, urlEmpleado).then(response => response.text()).then(data => {
-        callGetAllEmpleados()
+    updateRecord(record, urlEmpleadoContratacion).then(response => response.text()).then(data => {
         handleResponseAlert(data)
     }).catch(error => {
         console.log(error)
@@ -296,17 +151,9 @@ const callGetAllCentrosCosto = () => {
     });
 }
 
-const callGetAllExamenes = () => {
-    getAllRecords(urlTipoExamen).then(response => response.json()).then(data => {
-        fillExamenOptions(data)
-    }).catch(error => {
-        console.log(error);
-    });
-}
-
-const callGetAllCursos = () => {
-    getAllRecords(urlTipoCurso).then(response => response.json()).then(data => {
-        fillCursosOptions(data)
+const callGetAllTipoContrato = () => {
+    getAllRecords(urlTipoContrato).then(response => response.json()).then(data => {
+        fillTipoContratoOptions(data)
     }).catch(error => {
         console.log(error);
     });

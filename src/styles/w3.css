@@ -561,13 +561,19 @@ a {
     background-color: rgba(0, 0, 0, 0.4)
 }
 
-.w3-modal-content {
+.w3-modal-content, .w3-modal-content-M {
     margin: auto;
     background-color: #fff;
     position: relative;
     padding: 0;
     outline: 0;
+}
+.w3-modal-content{
     width: 600px
+}
+
+.w3-modal-content-M{
+    width: 500px;
 }
 
 .w3-bar {

@@ -2,7 +2,7 @@ const menuNavbarItemExpand1 = document.querySelector("#menuNavbarItemExpand1")
 const subMenuItems1 = document.querySelector("#subMenuItems1")
 const arrow1 = document.querySelector("#arrow1")
 
-const sectionTitle = document.querySelector("#sectionTitle")
+const pageTitle = document.querySelector("#page-title h2")
 const modalTitle = document.querySelector("#modalTitle")
 
 const totalRecords = document.querySelector("#totalRecords")
@@ -36,9 +36,12 @@ if (btnCancelRecordModal != null) {
     })
 }
 
-if (sectionTitle.innerHTML.includes('Centro de costo') || sectionTitle.innerHTML.includes('Tipo de contrato') || sectionTitle.innerHTML.includes('Tipo de curso') || sectionTitle.innerHTML.includes('Tipo de examen')) {
-    subMenuItems1.classList.toggle("w3-hide")
-    arrow1.classList.toggle("rotate180")
+if (pageTitle.innerHTML.includes('Centro de costo') ||
+    pageTitle.innerHTML.includes('Tipo de contrato') ||
+    pageTitle.innerHTML.includes('Tipo de curso') ||
+    pageTitle.innerHTML.includes('Tipo de examen')) {
+        subMenuItems1.classList.toggle("w3-hide")
+        arrow1.classList.toggle("rotate180")
 }
 
 //Show the response alert

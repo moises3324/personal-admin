@@ -3,79 +3,80 @@
 include_once '../models/Contratacion.php';
 include_once '../services/ContratacionService.php';
 
-$model = new Contratacion();
-$service = new ContratacionService();
+$contratacion = new Contratacion();
+$contratacionService = new ContratacionService();
 
-$action = "";
+$accion = "";
+//variables empleado
 $id = "";
-$start_date = "";
-$end_date = "";
+$fecha_termino = "";
 $tipo_contrato_id = "";
 $centro_costo_id = "";
 $empleado_id = "";
 
 if ($_POST) {
-    $action = $_POST['action'] ?? null;
-    $id = $_POST[''] ?? null;
-    $start_date = $_POST[''] ?? null;
-    $end_date = $_POST[''] ?? null;
-    $tipo_contrato_id = $_POST[''] ?? null;
-    $centro_costo_id = $_POST[''] ?? null;
-    $empleado_id = $_POST[''] ?? null;
+    $accion = $_POST['accion'] ?? null;
+    $id = $_POST['contratacion-id'] ?? null;
+    $fecha_termino = $_POST['contratacion-fecha-termino'] ?? null;
+    $tipo_contrato_id = $_POST['contratacion-tipo-contrato-id'] ?? null;
+    $centro_costo_id = $_POST['contratacion-centro-costo-id'] ?? null;
+    $empleado_id = $_POST['contratacion-empleado-id'] ?? null;
 
-    switch ($action) {
-        case 'create':
-            $model->setStartDate($start_date);
-            $model->setEndDate($end_date);
-            $model->setTipoContratoId($tipo_contrato_id);
-            $model->setCentoCostoid($centro_costo_id);
-            $model->setEmpleadoId($empleado_id);
-            if ($service->add($model)) {
-                echo 'Registro agregado correctamente';
-            }
-            break;
+    switch ($accion) {
         case 'delete':
-            if ($service->delete($id)) {
+            if ($$contratacion->delete($id)) {
                 echo 'Registro eliminado correctamente';
             }
             break;
         case 'update':
-            $model->setId((int)$id);
-            $model->setStartDate($start_date);
-            $model->setEndDate($end_date);
-            $model->setTipoContratoId($tipo_contrato_id);
-            $model->setCentoCostoid($centro_costo_id);
-            $model->setEmpleadoId($empleado_id);
-            if ($service->update($model)) {
+            $contratacion->setId((int)$id);
+            $contratacion->setFechaTermino($fecha_termino);
+            $contratacion->setTipoContratoId($tipo_contrato_id);
+            $contratacion->setCentoCostoId($centro_costo_id);
+            $contratacion->setEmpleadoId($empleado_id);
+            if ($empleadoService->update($contratacion)) {
                 echo 'Registro actualizado correctamente';
             }
             break;
         case 'getOne':
-            $model = $service->getOneById($id);
-            if ($model != null) {
+            $contratacion = $contratacionService->getOneById($id);
+            if ($contratacion != null) {
                 $json = array();
                 $json[] = array(
-                    'id' => $model->getId(),
-                    'start_date' => $model->getStartDate(),
-                    'end_date' => $model->getEndDate(),
-                    'tipo_contrato_id' => $model->getTipoContratoId(),
-                    'centro_costo_id' => $model->getCentroCostoId(),
-                    'empleado_id' => $model->getEmpleadoId()
+                    'id' => $contratacion->getId(),
+                    'fecha_termino' => $contratacion->getFechaTermino(),
+                    'tipo_contrato_id' => $contratacion->getTipoContratoId(),
+                    'centro_costo_id' => $contratacion->getCentroCostoId(),
+                    'empleado_id' => $contratacion->getEmpleadoId()
+                );
+                $jsonstring = json_encode($json[0]);
+                echo $jsonstring;
+            }
+            break;
+        case 'getOneByEmpleadoId':
+            $contratacion = $contratacionService->getOneByIdEmpleado($empleado_id);
+            if ($contratacion != null) {
+                $json = array();
+                $json[] = array(
+                    'id' => $contratacion->getId(),
+                    'fecha_termino' => $contratacion->getFechaTermino(),
+                    'tipo_contrato_id' => $contratacion->getTipoContratoId(),
+                    'centro_costo_id' => $contratacion->getCentroCostoId(),
+                    'empleado_id' => $contratacion->getEmpleadoId()
                 );
                 $jsonstring = json_encode($json[0]);
                 echo $jsonstring;
             }
             break;
         default:
-            echo 'No valid option';
+            echo 'Opción no válida';
     }
 } else {
     $json = array();
-    foreach ($service->getAll() as $row) {
+    foreach ($contratacionService->getAll() as $row) {
         $json[] = array(
             'id' => $row->getId(),
-            'start_date' => $row->getStartDate(),
-            'end_date' => $row->getEndDate(),
+            'fecha_termino' => $row->getFechaTermino(),
             'tipo_contrato_id' => $row->getTipoContratoId(),
             'centro_costo_id' => $row->getCentroCostoId(),
             'empleado_id' => $row->getEmpleadoId()
